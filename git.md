@@ -13,5 +13,5 @@ Git repository or repo is source code plus the history of changes you've made
 ## Basic Git Workflow
 1. make changes
 2. Add to the staging area
+2a. a change so i can commit
 3. Commit with a meaningful message (For future you and your teammates)
- 

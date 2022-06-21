@@ -122,3 +122,7 @@ This is multiline comment, or highlight a text block, and press ctrl + /
 //and multiples of 5 with buzz
 // Fizzbuzz from 1 to 16
 //1 2 fizz 4 buzz fizz 7 8 fizz buzz 11 fizz 13 14 fizzbuzz 16
+
+//In order to convert from string to integer,
+//string input = Console.ReadLine();
+//int var = int.Parse(input);

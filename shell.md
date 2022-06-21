@@ -32,6 +32,8 @@ Git bash is an _Emulator_ for bash
 - nano: command line text editor, use this to modify existing text files and create new text files.
 - rm: ReMoves a file or an entire folder (or a file tree)
 - cat: to conCATenate content of a text file to the console (IE, printing a file's content to screen)
+- mv: to MoVe files mv oldfile newfileLocation/filename.extension
+- cp: CoPy
 
 ### Flag/Option
 Flag, or option, is an optional parameter you can pass in with the command to provide additional information or trigger alternate behavior. For example, use rm with -r flag to delete folders!

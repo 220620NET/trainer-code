@@ -12,5 +12,7 @@ Git repository or repo is source code plus the history of changes you've made
 
 ## Basic Git Workflow
 1. make changes
-2. Add to the staging area
-3. Commit with a meaningful message (For future you and your teammates)
+2. Add to the staging area using git add file-or-folder-name
+3. Commit with a meaningful message (For future you and your teammates) using git commit -m "message here"
+
+- to view your staging area, use git status

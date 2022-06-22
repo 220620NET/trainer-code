@@ -48,3 +48,4 @@ Group Activity from now till 3PM EST
 
 ## Merge Conflict
 This is git's way of saying that there are changes occurred in the same location of the same file, and it needs human intervention/review to see what to keep.
+In order to resolve merge conflicts, review them and then choose which to keep, then add/commit.

@@ -36,3 +36,11 @@ Group Activity from now till 3PM EST
 ## Gitignore
 .gitignore file is a file telling git to ignore certain files/folders and do not track/add these to the repository.
 `dotnet new gitignore` at the root of your repository
+
+## Branching
+- `git branch` : displays all your LOCAL repository branches
+- `git checkout branch-name`: Move to a different branch
+- `git log`: gives you the commit history of the particular branch
+- `git branch branch-name`: creates a new branch
+- `git branch branch-name commitId`: creates a new branch from a particular commit
+- `git checkout -b branch-name`: this will create a new branch, and automatically check out to the branch

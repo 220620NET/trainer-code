@@ -140,7 +140,7 @@ string userInput = Console.ReadLine();
 //I'm going to parse this string to integer by using int.Parse() method that takes in a string and attempts to parse it. Here i'm going to blindly assume that the input i'm given is a string format of a number, not a character string, or an empty string.
 int parsedInput = int.Parse(userInput);
 
-for(int i = 1; i <= parsedInput; i++)
+for(int i = 0; i <= parsedInput; i++)
 {
     if(i % 15 == 0)
     {

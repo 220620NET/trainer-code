@@ -44,3 +44,4 @@ Group Activity from now till 3PM EST
 - `git branch branch-name`: creates a new branch
 - `git branch branch-name commitId`: creates a new branch from a particular commit
 - `git checkout -b branch-name`: this will create a new branch, and automatically check out to the branch
+- `git merge b`: merge commits from b branch into your current branch

@@ -50,3 +50,11 @@ Group Activity from now till 3PM EST
 ## Merge Conflict
 This is git's way of saying that there are changes occurred in the same location of the same file, and it needs human intervention/review to see what to keep.
 In order to resolve merge conflicts, review them and then choose which to keep, then add/commit.
+
+## Oops, I committed and pushed stuff to remote repository I didn't mean to
+1. `git rm --cached the-file-you-want-it-gone`: This is remove the file from the git repository, while leaving the file in the file system.
+1a. `git rm -r --cached folder-you-want-it-gone` to remove folders from git repository
+2. Fix your gitignore
+3. add and commit your changes
+4. push the changes to your remote repository
+5. profit

@@ -39,7 +39,7 @@ Group Activity from now till 3PM EST
 
 ## Branching
 - `git branch` : displays all your LOCAL repository branches
-- `git checkout branch-name`: Move to a different branch
+- `git checkout branch-name`: Move to a different branch. Make sure you don't have any uncommitted changes
 - `git log`: gives you the commit history of the particular branch
 - `git branch branch-name`: creates a new branch
 - `git branch branch-name commitId`: creates a new branch from a particular commit

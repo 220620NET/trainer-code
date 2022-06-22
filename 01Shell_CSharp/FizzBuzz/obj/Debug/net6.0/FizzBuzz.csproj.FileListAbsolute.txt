@@ -1,0 +1,15 @@
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\bin\Debug\net6.0\FizzBuzz.exe
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\bin\Debug\net6.0\FizzBuzz.deps.json
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\bin\Debug\net6.0\FizzBuzz.runtimeconfig.json
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\bin\Debug\net6.0\FizzBuzz.dll
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\bin\Debug\net6.0\ref\FizzBuzz.dll
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\bin\Debug\net6.0\FizzBuzz.pdb
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\FizzBuzz.csproj.AssemblyReference.cache
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\FizzBuzz.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\FizzBuzz.AssemblyInfoInputs.cache
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\FizzBuzz.AssemblyInfo.cs
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\FizzBuzz.csproj.CoreCompileInputs.cache
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\FizzBuzz.dll
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\ref\FizzBuzz.dll
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\FizzBuzz.pdb
+C:\Users\MinseonSong\Revature\220620net\trainer-code\01Shell_CSharp\FizzBuzz\obj\Debug\net6.0\FizzBuzz.genruntimeconfig.cache

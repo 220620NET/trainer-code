@@ -46,4 +46,5 @@ Group Activity from now till 3PM EST
 - `git checkout -b branch-name`: this will create a new branch, and automatically check out to the branch
 - `git merge b`: merge commits from b branch into your current branch
 
-## Create the Merge Conflict!
+## Merge Conflict
+This is git's way of saying that there are changes occurred in the same location of the same file, and it needs human intervention/review to see what to keep.

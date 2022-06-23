@@ -1,5 +1,7 @@
 ﻿using Models;
 using CustomExceptions;
+using Services;
+
 PokeTrainer trainer = new PokeTrainer();
 
 //Doesn't work, access denied
@@ -90,4 +92,13 @@ catch(Exception ex)
 finally
 {
     Console.WriteLine("This is finally block");
+}
+
+try
+{
+    new PokeService().FindTrainer(null);
+}
+catch(ArgumentNullException ex)
+{
+    Console.WriteLine("Hey");
 }

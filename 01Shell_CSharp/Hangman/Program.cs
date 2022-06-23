@@ -158,3 +158,13 @@ bool CheckComplete(char[] guessArr)
     }
     return isComplete;
 }
+
+
+//2 dimensional array
+int[,] twoDArray = new int[4, 6]{{0, 1, 2, 3, 4, 5}, {1,2,3,4,5,6}, {0,0,0,0,0,0}, {0,0,0,0,0,0}};
+twoDArray[0, 4] = 2;
+
+
+//Jagged Array, aka nested array
+int[][][] jaggedArray = new int[3][][];
+

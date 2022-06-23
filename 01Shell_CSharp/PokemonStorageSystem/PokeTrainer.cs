@@ -1,3 +1,5 @@
+using CustomExceptions;
+
 //Namespace is analogous to packages in java, and it is a Logical collection of types, such as classes, enums, structs, etc.
 namespace Models;
 
@@ -46,7 +48,7 @@ public class PokeTrainer
         if(String.IsNullOrWhiteSpace(nameToSet))
         {
             //Then we'll let the user of this class know that that's not a valid data
-            Console.WriteLine("Hey, this is invalid name");
+            throw new InputInvalidException("the name is invalid");
         }
         else
         {

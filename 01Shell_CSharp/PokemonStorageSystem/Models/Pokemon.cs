@@ -4,8 +4,18 @@ public class Pokemon
     public Pokemon() {}
 
     //what kind of data should I hold here?
-    //Strengh, Name, Level, Exp, Hp, TrainerWhoCaughtThisOne, Type, NickName
+    //IE Strengh, Name, Level, Exp, Hp, TrainerWhoCaughtThisOne, Type, NickName
     public string Name { get; set; }
+
+    public int Level { get; set; }
+
+    public int TrainerId { get; set; }
+
+    public string Type { get; set; }
+
+    public string NickName { get; set; }
+
+    public int Id { get; set; }
 }
 
 // public class Animal

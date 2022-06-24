@@ -66,6 +66,8 @@ public class PokeTrainer
     //DateTime, TimeOnly, DateOnly, TimeSpan
     public DateOnly DoB { get; set; }
 
+    public int Id { get; set; }
+
     public override string ToString()
     {
         return $"Name: {this.name} \nNumBadges: {this.NumBadges} \nMoney: {Money}";

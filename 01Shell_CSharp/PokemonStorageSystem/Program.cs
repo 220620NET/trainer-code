@@ -1,30 +1,31 @@
-﻿using Models;
-using CustomExceptions;
-using Services;
+﻿using UI;
 
-PokeTrainer trainer = new PokeTrainer();
+MainMenu menu = new MainMenu();
+menu.Start();
 
-//Doesn't work, access denied
-// trainer.name = "Ash Ketchum";
+// PokeTrainer trainer = new PokeTrainer();
 
-trainer.SetName("Ash Ketchum");
+// //Doesn't work, access denied
+// // trainer.name = "Ash Ketchum";
+
+// trainer.SetName("Ash Ketchum");
 
 
-Console.WriteLine(trainer.GetName());
+// Console.WriteLine(trainer.GetName());
 
-PokeTrainer anotherTrainer = new PokeTrainer("Brock");
+// PokeTrainer anotherTrainer = new PokeTrainer("Brock");
 
-Console.WriteLine(anotherTrainer.GetName());
+// Console.WriteLine(anotherTrainer.GetName());
 
 //Object Initializer
-int[] numArr = new int[10]{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+// int[] numArr = new int[10]{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-Console.WriteLine(numArr.ToString());
+// Console.WriteLine(numArr.ToString());
 
-PokeTrainer thirdTrainer = new PokeTrainer {
-    NumBadges = 3,
-    Money = 10,
-};
+// PokeTrainer thirdTrainer = new PokeTrainer {
+//     NumBadges = 3,
+//     Money = 10,
+// };
 
 //Two Main Data Types in C#
 //In C#, we have Value Type and Reference Type
@@ -38,17 +39,17 @@ PokeTrainer thirdTrainer = new PokeTrainer {
 //Examples of Value Types: any numbers (int, double, float, decimal, short, long, byte), bool, char, etc.
 //Examples of Reference Types are: Classes, String (because string is an array of characters), any Collections (because these are in face classes), etc.
 
-PokeTrainer trainerA = new PokeTrainer();
-PokeTrainer trainerB = trainerA;
+// PokeTrainer trainerA = new PokeTrainer();
+// PokeTrainer trainerB = trainerA;
 
-Console.WriteLine(trainerA == trainerB);
+// Console.WriteLine(trainerA == trainerB);
 
-PokeTrainer trainerC = new PokeTrainer("trainer name");
-PokeTrainer trainerD = new PokeTrainer("trainer name");
+// PokeTrainer trainerC = new PokeTrainer("trainer name");
+// PokeTrainer trainerD = new PokeTrainer("trainer name");
 
-Console.WriteLine(trainerC == trainerD);
+// Console.WriteLine(trainerC == trainerD);
 
-Console.WriteLine(trainerD.ToString());
+// Console.WriteLine(trainerD.ToString());
 
 //Overloading vs Overriding
 //These are examples of polymorphism, which is one of 4 OOP principles. 
@@ -75,34 +76,34 @@ There are many different types of exceptions for different scenarios. You want t
 And, if you find that there is no built in exception for the thing you're trying to do, you can create your own custom exception
 */
 
-try
-{
-    PokeTrainer testTrainer = new PokeTrainer();
-    testTrainer.SetName("     ");
-}
-catch(InputInvalidException ex)
-{
-    Console.WriteLine("Input Invalid Exception" + ex.Message);
-}
-catch(Exception ex)
-{
-    Console.WriteLine("caught Exception" + ex.Message);
-    // throw;
-}
-finally
-{
-    Console.WriteLine("This is finally block");
-}
+// try
+// {
+//     PokeTrainer testTrainer = new PokeTrainer();
+//     testTrainer.SetName("     ");
+// }
+// catch(InputInvalidException ex)
+// {
+//     Console.WriteLine("Input Invalid Exception" + ex.Message);
+// }
+// catch(Exception ex)
+// {
+//     Console.WriteLine("caught Exception" + ex.Message);
+//     // throw;
+// }
+// finally
+// {
+//     Console.WriteLine("This is finally block");
+// }
 
-try
-{
-    new PokeService().FindTrainer(null);
-}
-catch(ArgumentNullException ex)
-{
-    Console.WriteLine("Hey");
-}
+// try
+// {
+//     new PokeService().FindTrainer(null);
+// }
+// catch(ArgumentNullException ex)
+// {
+//     Console.WriteLine("Hey");
+// }
 
 
-Cat auryn = new Cat();
-auryn.Speak();
+// Cat auryn = new Cat();
+// auryn.Speak();

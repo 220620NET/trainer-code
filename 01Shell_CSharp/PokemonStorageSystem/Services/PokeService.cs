@@ -5,6 +5,14 @@ namespace Services;
 
 public class PokeService
 {
+
+    public void Register(PokeTrainer trainerToRegister)
+    {
+        //This method takes in the new trainer to be registered, and adds it to the registry
+        PokeStorage.TrainerRegistry[PokeStorage.RegistrySize] = trainerToRegister;
+        PokeStorage.RegistrySize++;
+    }
+
     /// <summary>
     /// This method finds a trainer with the given name from PokeStorage static class
     /// </summary>

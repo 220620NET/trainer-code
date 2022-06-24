@@ -1,7 +1,7 @@
 ﻿using UI;
 
-MainMenu menu = new MainMenu();
-menu.Start();
+// MainMenu menu = new MainMenu();
+// menu.Start();
 
 // PokeTrainer trainer = new PokeTrainer();
 
@@ -107,3 +107,29 @@ And, if you find that there is no built in exception for the thing you're trying
 
 // Cat auryn = new Cat();
 // auryn.Speak();
+
+// Dictionary<int, int> intDict = new Dictionary<int, int>();
+// List<int> intList = new List<int>();
+// LinkedList<int> intLL = new LinkedList<int>();
+
+// IEnumerable<int> enumerable = intLL;
+
+// foreach(var item in enumerable)
+// {
+
+// }
+
+
+Console.WriteLine("Choose an animal [d/c]");
+IWalkable animal;
+string input = Console.ReadLine();
+if(input == "d")
+{
+    animal = new Dog();
+}
+else
+{
+    animal = new Cat();
+}
+
+Console.WriteLine(animal.Walk());

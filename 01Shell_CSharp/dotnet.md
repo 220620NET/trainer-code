@@ -41,3 +41,34 @@ Is a piece of software that includes ALL tools you might want to develop a softw
     - First navigate to the folder that is holding all these projects
     - run `dotnet new sln -n sln-name` to generate a new solution
     - then run `dotnet sln add relative-paths-to-project-folders` in order to register projects to the solution (IN THE FOLDER THAT IS CONTAINING THE SLN)
+        - `dotnet sln add ../Models ../UI ../Services ../DataAccess`
+
+
+## Interface
+What if, for classes, we had to provide an instruction sheet?
+- ie. These are functionalities available to this class
+
+We use interface to enforce a certain set of behavior on a class that implements it
+
+Interface is a type that acts as a contract to a set of public behavior
+Which means, any class that _implements_ that particular interface MUST implement all of interface's methods
+
+For Example, any classes that implement ICloneable interface must implement all of ICloneable's method, which there is one, Clone().
+Which means, if I'm using a class that implements ICloneable, as a User I know I can call Clone method on this class.
+
+Interface is similar to abstract class in that both of them can have methods that doesn't have body. Interface methods are inherently public and abstract (aka doesn't have method body). However, they are different because abstract classes can have a constructor where as interfaces don't.
+
+Interfaces for the most part contains definition for public behaviors/traits
+
+## Interface vs Abstract Classes
+- In Interface, everything is implicitly public
+- Abstract Class can have constructors
+- Abstract Class can also have concrete members (concrete methods, properties)
+    - Concrete method is a method with a method body
+    - These are concrete methods
+        - public void Speak() { Console.WriteLine("Meow");}
+        - public void Speak() {}
+    - This is an abstract method
+        - The method only has the method signature (access mod, return type, method name, method parameter) and not the method body( the curly braces )
+        - public void Speak();
+- We can implement multiple interfaces where as we can only inherit one class

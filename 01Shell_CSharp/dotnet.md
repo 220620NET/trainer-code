@@ -37,3 +37,7 @@ Is a piece of software that includes ALL tools you might want to develop a softw
 4. Connect projects to each other by creating project references.
     1. If project A needs classes from project B, navigate to project A in terminal. (cd ...)
     2. run `dotnet add reference relative-path-to-the-project-B-folder` to add reference of project B to project A (ex. `dotnet add reference ../Models`)
+5. Finally, Create a solution to package all these projects together
+    - First navigate to the folder that is holding all these projects
+    - run `dotnet new sln -n sln-name` to generate a new solution
+    - then run `dotnet sln add relative-paths-to-project-folders` in order to register projects to the solution (IN THE FOLDER THAT IS CONTAINING THE SLN)

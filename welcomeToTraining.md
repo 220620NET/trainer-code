@@ -1,4 +1,4 @@
-# Welcome to Training!
+ # Welcome to Training!
 ## 220620-USF-.NET
 
 Welcome, I'm excited to welcome you to Revature's training. In the next 12 weeks, we will cover topics pertaining to developing fullstack web applications in .NET Platform. In this document, we'll discuss what to expect during the training.

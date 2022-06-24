@@ -13,7 +13,7 @@ public class PokeService
     {
         try 
         {
-            Array.Find(PokeStorage.TrainerRegistry, searchCriteria);
+            return Array.Find(PokeStorage.TrainerRegistry, searchCriteria);
         }
         catch(ArgumentNullException ex)
         {

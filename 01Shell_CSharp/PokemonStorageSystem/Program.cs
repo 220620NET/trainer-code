@@ -102,3 +102,7 @@ catch(ArgumentNullException ex)
 {
     Console.WriteLine("Hey");
 }
+
+
+Cat auryn = new Cat();
+auryn.Speak();

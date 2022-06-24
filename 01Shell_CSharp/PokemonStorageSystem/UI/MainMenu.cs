@@ -33,6 +33,11 @@ public class MainMenu
                     PokeTrainer newTrainer = new PokeTrainer();
                     newTrainer.SetName(name);
 
+                    Console.WriteLine("How many badges to you have?");
+                    string numBadges = Console.ReadLine();
+                    int intBadges = Int32.Parse(numBadges);
+                    newTrainer.NumBadges = intBadges;
+
                     new PokeService().Register(newTrainer);
                     for(int i = 0; i < PokeStorage.TrainerRegistry.Length; i++)
                     {

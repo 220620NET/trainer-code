@@ -4,3 +4,11 @@
     - This will be open until 6/26/22 11:45 EST
 3. Solve two challenges in the contest
 4. Make sure to submit the problems
+
+## Other Resources
+- LeetCode
+- CodinGame
+- Codewars
+
+## If you want to practice more in Hackerrank
+Go to the Problem Solving/Data Structure category and do those problems in C#

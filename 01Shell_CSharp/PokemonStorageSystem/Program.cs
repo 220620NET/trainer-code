@@ -133,3 +133,14 @@ else
 }
 
 Console.WriteLine(animal.Walk());
+
+//Implicit vs Explicit Conversion
+//short <-> int <-> double
+int n = 100;
+//this is an example of implicit conversion
+double doubleN = n;
+
+double m = 2.6423;
+//This one can't be converted implicitly because there is going to be a data loss
+//it's going to go from 2.1423 -> 2
+int intM = (int) m;

@@ -55,7 +55,7 @@ public class PokeTrainer
     public decimal Money { get; set; }
 
     //DateTime, TimeOnly, DateOnly, TimeSpan
-    public DateOnly DoB { get; set; }
+    public DateTime DoB { get; set; }
 
     public int Id { get; set; }
 

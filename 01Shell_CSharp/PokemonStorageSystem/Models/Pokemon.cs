@@ -19,6 +19,8 @@ public class Pokemon
         {
             pokemonName = newName;
         }
+
+        
     }
     public string Name 
     { 

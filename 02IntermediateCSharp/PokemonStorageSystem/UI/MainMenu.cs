@@ -1,6 +1,7 @@
 using Models;
 using Services;
 using System.Text.Json;
+using CustomExceptions;
 
 namespace UI;
 
@@ -71,6 +72,10 @@ public class MainMenu
         catch(JsonException ex)
         {
             Console.WriteLine("sorry, something happened with our database, please try again");
+        }
+        catch(DuplicateRecordException ex)
+        {
+            Console.WriteLine("Sorry, the name is already taken");
         }
     }
 }

@@ -7,25 +7,49 @@ public class PokeTrainerRepository
 
     //In this particular instance, we'll be using json file to persist our data.
 
-    private const string filePath = "../DataAcess/trainerRegistry.json"; 
+    private const string filePath = "../DataAccess/trainerRegistry.json"; 
 
-    public PokeTrainer AddPokeTrainer(PokeTrainer newTrainer)
+    public Dictionary<string, PokeTrainer> GetAllTrainers()
     {
-        string fileString = File.ReadAllText(filePath);
-
         //Here, i'm Deseralizing the string to a type of C# object that rest of the application can use
         //serialization is a process of converting data into stream of bytes to be transported elsewhere to be saved elsewhere.
         //In here, we are converting our C# objects to stream of bytes, so we can save it into a file.
         //The data can be serialized into byteStream, characterStream, etc.
 
         //In this particular line, I took the string that I read from the file, and then I Deserialized this back into C# object I(the program) know how to work with. The process of converting the string/bytes back into objects is called deserialization
+        string fileString = File.ReadAllText(filePath);
         try
         {
-            Dictionary<string, PokeTrainer> trainerRegistry = JsonSerializer.Deserialize<Dictionary<string, PokeTrainer>>(fileString);
+            return JsonSerializer.Deserialize<Dictionary<string, PokeTrainer>>(fileString);
+        }
+        catch(JsonException)
+        {
+            throw;
+        }
+    }
 
-            trainerRegistry.Add(newTrainer.Name, newTrainer);
+    public PokeTrainer GetTrainerByName(string name)
+    {
+        try
+        {
+            Dictionary<string, PokeTrainer> allTrainers = GetAllTrainers();
+            return allTrainers[name];
+        }
+        catch(JsonException)
+        {
+            throw;
+        }
+    }
 
-            File.WriteAllText(filePath, JsonSerializer.Serialize(trainerRegistry));
+    public PokeTrainer AddPokeTrainer(PokeTrainer newTrainer)
+    {
+        try
+        {
+            Dictionary<string, PokeTrainer> allTrainers = GetAllTrainers();
+
+            allTrainers.Add(newTrainer.Name, newTrainer);
+
+            File.WriteAllText(filePath, JsonSerializer.Serialize(allTrainers));
 
             return newTrainer;
         }

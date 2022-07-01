@@ -63,4 +63,23 @@ public class PokeTrainer
     {
         return $"Name: {this.Name} \nNumBadges: {this.NumBadges} \nMoney: {Money}";
     }
+
+    public override bool Equals(object obj)
+    {
+        if(obj.GetType() == this.GetType())
+        {
+            //then they're both PokeTrainer objects!
+            PokeTrainer trainerToCompare = (PokeTrainer) obj;
+
+            if(this.Id == trainerToCompare.Id && this.Name == trainerToCompare.Name && this.DoB == trainerToCompare.DoB)
+            {
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

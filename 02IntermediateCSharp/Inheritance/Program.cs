@@ -1,19 +1,33 @@
 ﻿//Inheritance
-Mammal whodis = new Sheep();
-Sheep baa = (Sheep) whodis;
-baa.Shear();
-whodis = new Mammal();
-whodis = new Cat();
+// Mammal whodis = new Sheep();
+// Sheep baa = (Sheep) whodis;
+// baa.Shear();
+// whodis = new Mammal();
+// whodis = new Cat();
 
-//Traveling up and down the inheritance chain
+// //Traveling up and down the inheritance chain
 
-//UpCasting (implicit)
-Mammal warmBloodedMammal = new Sheep();
-warmBloodedMammal = new Cat();
+// //UpCasting (implicit)
+// Mammal warmBloodedMammal = new Sheep();
+// // warmBloodedMammal = new Cat();
+// // warmBloodedMammal.Shear(); //doesn't work
 
-//DownCasting (explicit)
-Animal baa = new Sheep();
-Sheep mySheep = (Sheep) baa;
+// Sheep actuallySheep = (Sheep) warmBloodedMammal;
+// Console.WriteLine(actuallySheep.Shear()); // 4
+
+// //DownCasting (explicit)
+// Animal baaa = new Sheep();
+// Sheep mySheep = (Sheep) baaa;
+
+Cat auryn = new Cat();
+Console.WriteLine(auryn.Move());
+
+Mammal aMammal = auryn;
+Console.WriteLine(aMammal.Move());
+
+
+// Animal anAnimal = auryn;
+// Console.WriteLine(anAnimal.GetType());
 
 
 public abstract class Animal
@@ -46,10 +60,19 @@ public enum TypeOfCoat { Feather, Fur, Scale, Wool }
 
 public class Mammal : Animal
 {
-
+    public override string Move()
+    {
+        return "Mammal moves";
+    }
 }
 
-public class Cat : Mammal {}
+public class Cat : Mammal 
+{
+    public override string Move()
+    {
+        return "Cat slinks";
+    }
+}
 
 public class Sheep : Mammal {
 

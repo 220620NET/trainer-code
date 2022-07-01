@@ -7,7 +7,7 @@ Each classes should only have one and only one responsibility. ie. Do not create
 
 ## Open Close
 - Open to Extension but Closed to modification
-- The class should be open to adding additional features in the future (scalability) but its previous features should be closed/protected from being modified
+- The class should be open to adding additional features in the future (scalable) but its previous features should be closed/protected from being modified
 
 ## Liskov Substitution Principle
 All subtypes (or child classes) should be able to substitute its parent class.

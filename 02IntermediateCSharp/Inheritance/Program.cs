@@ -16,19 +16,8 @@
 // Console.WriteLine(actuallySheep.Shear()); // 4
 
 // //DownCasting (explicit)
-// Animal baaa = new Sheep();
-// Sheep mySheep = (Sheep) baaa;
-
-Cat auryn = new Cat();
-Console.WriteLine(auryn.Move());
-
-Mammal aMammal = auryn;
-Console.WriteLine(aMammal.Move());
-
-
-// Animal anAnimal = auryn;
-// Console.WriteLine(anAnimal.GetType());
-
+Animal baaa = new Sheep();
+Sheep mySheep = (Sheep) baaa;
 
 public abstract class Animal
 {

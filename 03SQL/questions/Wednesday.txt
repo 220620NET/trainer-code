@@ -1,0 +1,21 @@
+Things we covered in lecture:
+	What is a database?
+	What is a relational database?
+	What is a DBMS?
+	What DBMS are we using?
+	What is SQL?
+	What are the 5 sublanguages of SQL and what are their purposes?
+	What are the properties of a transaction?
+	What are some common datatypes of SQL?
+	What are constraints?
+	What are some common constraints?
+	What is a primary key?
+	What are the 3 different types of primary keys?
+	What is a foreign key?
+	What is multiplicity?
+	How can you achieve a One to Many relationship?
+	How can you achieve a Many to Many relationship?
+
+Self Study terms:
+	What does the term persistence mean?
+	What is Referential integrity?

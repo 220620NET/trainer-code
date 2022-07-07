@@ -1,0 +1,15 @@
+What is Normalization?
+What are the first 3 normal forms?
+Be familiar with the following keywords
+	- select
+	- where
+	- order by
+	- like
+What ar aggregate functions?
+	- be able to name some aggregate functions
+What do the group by and having keywords do?
+What are scalar functions?
+	- be able to name some scalar functions
+What are joins?
+What are the different kinds of joins?
+What are sets?

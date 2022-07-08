@@ -117,8 +117,7 @@ namespace Repository
 
         }
 
-        public void WhatsUp(){
-            
+        public static void WhatsUp(){
         }
 
     }

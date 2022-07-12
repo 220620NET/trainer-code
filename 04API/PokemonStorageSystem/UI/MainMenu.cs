@@ -7,6 +7,11 @@ namespace UI;
 
 public class MainMenu
 {
+    private readonly AuthService _auth;
+    public MainMenu(AuthService auth)
+    {
+        _auth = auth;
+    }
     public void Start()
     {
         Console.WriteLine("Welcome to Pokemon Storage System!");
@@ -66,7 +71,7 @@ public class MainMenu
         //UI's job is now done, we now send it off to actually be registered somewhere else.
         try
         {
-            PokeTrainer trainer = new AuthService().Register(registeringTrainer);
+            PokeTrainer trainer = _auth.Register(registeringTrainer);
             Console.WriteLine("Registered successfully!");
         }
         catch(JsonException ex)

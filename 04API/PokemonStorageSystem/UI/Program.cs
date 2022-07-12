@@ -1,3 +1,6 @@
 ﻿using UI;
+using Services;
+using DataAccess;
 
-new MainMenu().Start();
+//Dependency injection
+new MainMenu(new AuthService(new PokemonTrainerRepository())).Start();

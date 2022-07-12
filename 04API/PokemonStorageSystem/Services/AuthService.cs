@@ -20,16 +20,14 @@ public class AuthService
         //First, I need to get the registry, and add it there and then save the new dictionary/collection
         try
         {
-            PokeTrainer duplicateCheck = _repo.GetPokeTrainer(newTrainer.Name);
-            if(duplicateCheck != null)
-            {
-                throw new DuplicateRecordException();
-            }
-            return _repo.AddPokeTrainer(newTrainer);
+            _repo.GetPokeTrainer(newTrainer.Name);
+            throw new DuplicateRecordException();
         }
-        catch(JsonException)
+        catch(RecordNotFoundException)
         {
-            throw;
+            //we are g2g with registration
+            Console.WriteLine("We didn't find the record");
+            return _repo.AddPokeTrainer(newTrainer);
         }
     }
 

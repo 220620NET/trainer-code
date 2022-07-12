@@ -1,6 +1,7 @@
 using Models;
 using Microsoft.Data.SqlClient;
 
+//This class utilizes singleton and factory design pattern
 public class ConnectionFactory
 {
     private static ConnectionFactory? _instance;

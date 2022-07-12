@@ -73,6 +73,7 @@ public class MainMenu
         {
             PokeTrainer trainer = _auth.Register(registeringTrainer);
             Console.WriteLine("Registered successfully!");
+            Console.WriteLine(trainer.Id + ": " + trainer.Name);
         }
         catch(JsonException ex)
         {

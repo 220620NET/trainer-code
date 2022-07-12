@@ -1,8 +1,17 @@
 using Models;
 using Microsoft.Data.SqlClient;
+using CustomExceptions;
+using System.Data;
 
 namespace DataAccess;
 
+/**
+* ADO.NET: is a collection of libraries that helps developers write data access code in a uniform fashion regardless of what data source they are dealing with
+* All you need to be able to work with diff data source is a driver that is suited for a particular data source. For example, for SQL Server, we need Microsoft.Data.SqlClient. Install that to DL by navigating to DL folder and running dotnet add package Microsoft.Data.SqlClient.
+* Two architecture styles: Connected and Disconnected
+* Connected Architecture: We use objects such as DBConnection, DBCommand, DataReader to access data while we're connected to the database. DataReader is much faster at reading large amount of data compared to Disconnected Architecture.
+* Disconnected Architecture: We use objects such as Data Adapter and DataSet (is like a bucket for the data) to have access to the data even when we're not connected to the db. The advantage of using DataAdapter, is that we have access to the schema of result set, so we can refer to the column by their name, instead of accessing by index as well as being able to automatically generate SqlCommands
+*/
 public class PokemonTrainerRepository : IPokemonTrainerRepository
 {
     private readonly ConnectionFactory _connectionFactory;
@@ -38,10 +47,6 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
         reader.Close();
         conn.Close();
 
-        foreach(PokeTrainer trainer in trainers)
-        {
-            Console.WriteLine($"{trainer.Id}: {trainer.Name}");
-        }
         return trainers;
     }
 
@@ -49,11 +54,41 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
     /// Get Pokemon Trainer by name
     /// </summary>
     /// <param name="name">exact name to search for</param>
-    /// <returns>found Pokemon trainer object, if not found, returns null</returns>
+    /// <returns>found Pokemon trainer object</returns>
+    /// <exception cref="RecordNotFoundException">when there is no trainer with such name</exception>
     public PokeTrainer GetPokeTrainer(string name)
     {
-        GetAllTrainers();
-        return new PokeTrainer();
+        PokeTrainer foundTrainer;
+        SqlConnection conn = _connectionFactory.GetConnection();
+        conn.Open();
+
+        //security hazard - do not do this
+        // SqlCommand cmd = new SqlCommand($"Select * From PokeTrainer Where trainer_name = '{name}'", conn);
+
+        //do this instead to prevent against sql injection
+        SqlCommand cmd = new SqlCommand("Select * From PokeTrainer Where trainer_name = @name", conn);
+
+        // SqlParameter param = new SqlParameter("@name", name);
+        // cmd.Parameters.Add(param);
+
+        cmd.Parameters.AddWithValue("@name", name);
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        //while there are more rows to read
+        while(reader.Read())
+        {
+            return new PokeTrainer
+            {
+                Id = (int)reader["trainer_id"],
+                Name = (string)reader["trainer_name"],
+                Money = Convert.ToDecimal((double)reader["trainer_money"]),
+                DoB = (DateTime)reader["date_of_birth"]
+            };
+        }
+
+        //if we get here, we know that we haven't found any trainer with such name
+        throw new RecordNotFoundException("Could not find the pokemon trainer with such name");
     }
 
     /// <summary>
@@ -73,6 +108,35 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
     /// <returns>the same trainer, with the generated id</returns>
     public PokeTrainer AddPokeTrainer(PokeTrainer newTrainerToRegister)
     {
-        throw new NotImplementedException();
+        //disconnected architecture ADO.NET
+        //DataSet is a container for the data adapter to fill with data it fetches with the select command
+        DataSet pokeTrainerSet = new DataSet();
+
+        SqlDataAdapter trainerAdapter = new SqlDataAdapter("Select * From PokeTrainer",  _connectionFactory.GetConnection());
+
+        trainerAdapter.Fill(pokeTrainerSet, "trainerTable");
+
+        // question mark(?) after a reference type makes it nullable as in, this trainerTable variable can either be DataTable or null
+        DataTable? trainerTable = pokeTrainerSet.Tables["trainerTable"];
+
+        if(trainerTable != null)
+        {
+            DataRow newTrainer = trainerTable.NewRow();
+            newTrainer["trainer_name"] = newTrainerToRegister.Name;
+            newTrainer["trainer_money"] = newTrainerToRegister.Money;
+            newTrainer["num_badges"] = newTrainerToRegister.NumBadges;
+            newTrainer["date_of_birth"] = newTrainerToRegister.DoB;
+
+            trainerTable.Rows.Add(newTrainer);
+
+            // SqlCommand cmd = new SqlCommand("Insert into PokeTrainer (trainer_name, trainer_money, num_badges) values (@name, @money, @badges");
+            SqlCommandBuilder cmdbuilder = new SqlCommandBuilder(trainerAdapter);
+
+            SqlCommand insertCommand = cmdbuilder.GetInsertCommand();
+            trainerAdapter.InsertCommand = insertCommand;
+
+            trainerAdapter.Update(trainerTable);
+        }
+        return newTrainerToRegister;
     }
 }

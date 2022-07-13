@@ -131,10 +131,12 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
 
             // SqlCommand cmd = new SqlCommand("Insert into PokeTrainer (trainer_name, trainer_money, num_badges) values (@name, @money, @badges");
             SqlCommandBuilder cmdbuilder = new SqlCommandBuilder(trainerAdapter);
-
             SqlCommand insertCommand = cmdbuilder.GetInsertCommand();
+
+            //assign the command we just created to use to insert new records to this adapter
             trainerAdapter.InsertCommand = insertCommand;
 
+            //persist changes to the dbf 
             trainerAdapter.Update(trainerTable);
         }
         return newTrainerToRegister;

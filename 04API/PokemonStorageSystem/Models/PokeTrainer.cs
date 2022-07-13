@@ -1,4 +1,5 @@
 using CustomExceptions;
+using System.ComponentModel.DataAnnotations;
 
 //Namespace is analogous to packages in java, and it is a Logical collection of types, such as classes, enums, structs, etc.
 namespace Models;
@@ -15,22 +16,25 @@ public class PokeTrainer
         Money = 0;
     }
 
-    //This is constructor overloading
-    public PokeTrainer(string trainerName)
-    {
-        NumBadges = 0;
-        Money = 0;
-        Name = trainerName;
-    }
+    ////This is constructor overloading
+    //public PokeTrainer(string trainerName)
+    //{
+    //    NumBadges = 0;
+    //    Money = 0;
+    //    Name = trainerName;
+    //}
 
-    public PokeTrainer(string trainerName, int badges)
-    {
-        Name = trainerName;
-        NumBadges = badges;
-        Money = 0;
-    }
+    //public PokeTrainer(string trainerName, int badges)
+    //{
+    //    Name = trainerName;
+    //    NumBadges = badges;
+    //    Money = 0;
+    //}
 
     private string _name;
+
+    [Required]
+    [StringLength(100, ErrorMessage ="Name cannot be longer than 100 characters")]
     public string Name 
     { 
         get { return _name; }
@@ -50,6 +54,7 @@ public class PokeTrainer
 
 
     //automatic property or property for short. This is nothing more than a syntactic sugar over the above
+    [Range(0, 10)]
     public int NumBadges { get; set; }
 
     public decimal Money { get; set; }

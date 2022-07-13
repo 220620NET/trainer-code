@@ -1,10 +1,19 @@
 using Services;
+using CustomExceptions;
 using DataAccess;
+using Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
+//dependency injection handled by ASP.NET Core
+//Different ways to add your dependencies: Singleton, Scoped, Transient
+//Singleton instances are shared throughtout the entire lifetime of the application
+//Scoped instances are shared during the req/res lifecycle
+//Transient instances are generated everytime it needs an instance of it
 builder.Services.AddSingleton<ConnectionFactory>(ctx => ConnectionFactory.GetInstance(builder.Configuration.GetConnectionString("PokeDB")));
 builder.Services.AddScoped<IPokemonTrainerRepository, PokemonTrainerRepository>();
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddTransient<AuthService>();
+builder.Services.AddTransient<PokeTrainerService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -28,10 +37,37 @@ app.MapGet("/greet", (string name, string location) => {
     return $"Hello {name} from {location}";
 });
 
-app.MapGet("/eat", (string food) => $"Someone is eating {food}");
+/// <summary>
+/// Returns all pokemon trainers in the db
+/// </summary>
+app.MapGet("/trainers", () =>
+{
+    //using ASP.NET core dependency injector
+    var scope = app.Services.CreateScope();
+    PokeTrainerService service = scope.ServiceProvider.GetRequiredService<PokeTrainerService>();
 
-app.MapPost("/greet", (string name) => {
-    return $"Hello {name}";
+    return service.GetAllTrainers();
+});
+
+//When we ask for a reference type such as PokeTrainer as a payload
+//the framework will expect to receive this in the request body
+//The ASP.NET Core will take the json data and turn it into PokeTrainer
+//This is called "Model binding"
+app.MapPost("/register", (PokeTrainer trainer) =>
+{
+    var scope = app.Services.CreateScope();
+    AuthService service = scope.ServiceProvider.GetRequiredService<AuthService>();
+
+    try
+    {
+        service.Register(trainer);
+        return Results.Created("/register", trainer);
+    }
+    catch (DuplicateRecordException)
+    {
+        //do something
+        return Results.Conflict("Trainer with this name already exists");
+    }
 });
 
 app.Run();

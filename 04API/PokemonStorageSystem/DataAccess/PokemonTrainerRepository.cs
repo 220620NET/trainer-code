@@ -15,9 +15,9 @@ namespace DataAccess;
 public class PokemonTrainerRepository : IPokemonTrainerRepository
 {
     private readonly ConnectionFactory _connectionFactory;
-    public PokemonTrainerRepository()
+    public PokemonTrainerRepository(ConnectionFactory factory)
     {
-        _connectionFactory = ConnectionFactory.GetInstance();
+        _connectionFactory = factory;
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
                 Id = (int)reader["trainer_id"],
                 Name = (string)reader["trainer_name"],
                 Money = Convert.ToDecimal((double)reader["trainer_money"]),
-                DoB = (DateTime)reader["date_of_birth"]
+                DoB = (DateTime) reader["date_of_birth"]
             });
         }
         reader.Close();

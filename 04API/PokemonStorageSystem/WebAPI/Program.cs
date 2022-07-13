@@ -1,4 +1,10 @@
+using Services;
+using DataAccess;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<ConnectionFactory>(ctx => ConnectionFactory.GetInstance(builder.Configuration.GetConnectionString("PokeDB")));
+builder.Services.AddScoped<IPokemonTrainerRepository, PokemonTrainerRepository>();
+builder.Services.AddScoped<AuthService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

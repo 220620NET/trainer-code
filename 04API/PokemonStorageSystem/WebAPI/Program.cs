@@ -2,6 +2,8 @@ using Services;
 using CustomExceptions;
 using DataAccess;
 using Models;
+using Microsoft.AspNetCore.Mvc;
+using WebAPI.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,8 @@ builder.Services.AddSingleton<ConnectionFactory>(ctx => ConnectionFactory.GetIns
 builder.Services.AddScoped<IPokemonTrainerRepository, PokemonTrainerRepository>();
 builder.Services.AddTransient<AuthService>();
 builder.Services.AddTransient<PokeTrainerService>();
+builder.Services.AddScoped<AuthController>();
+builder.Services.AddScoped<PokemonTrainerController>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,13 +30,14 @@ app.UseSwaggerUI();
 app.MapGet("/", () => "Hi Auryn!");
 
 //the curly braces are the route parameters 
-app.MapGet("/greet/{name}", (string name) => {
+app.MapGet("/greet/{name}", ([FromRoute]string name) => {
     return $"Hi {name}!";
 });
 
-//Query parameter: these are key value pairs you pass in with your url after the question mark(?)
-app.MapGet("/greet", (string name, string location) => {
-    if(String.IsNullOrWhiteSpace(location))
+////Query parameter: these are key value pairs you pass in with your url after the question mark(?)
+app.MapGet("/greet", ([FromQuery] string name, string location) =>
+{
+    if (String.IsNullOrWhiteSpace(location))
         return $"Hello {name}";
     return $"Hello {name} from {location}";
 });
@@ -40,34 +45,12 @@ app.MapGet("/greet", (string name, string location) => {
 /// <summary>
 /// Returns all pokemon trainers in the db
 /// </summary>
-app.MapGet("/trainers", () =>
-{
-    //using ASP.NET core dependency injector
-    var scope = app.Services.CreateScope();
-    PokeTrainerService service = scope.ServiceProvider.GetRequiredService<PokeTrainerService>();
-
-    return service.GetAllTrainers();
-});
+app.MapGet("/trainers", (PokemonTrainerController controller) => controller.GetAllTrainers());
 
 //When we ask for a reference type such as PokeTrainer as a payload
 //the framework will expect to receive this in the request body
 //The ASP.NET Core will take the json data and turn it into PokeTrainer
-//This is called "Model binding"
-app.MapPost("/register", (PokeTrainer trainer) =>
-{
-    var scope = app.Services.CreateScope();
-    AuthService service = scope.ServiceProvider.GetRequiredService<AuthService>();
-
-    try
-    {
-        service.Register(trainer);
-        return Results.Created("/register", trainer);
-    }
-    catch (DuplicateRecordException)
-    {
-        //do something
-        return Results.Conflict("Trainer with this name already exists");
-    }
-});
+//using JsonSerializer from System.Text.Json namespace
+app.MapPost("/register", (PokeTrainer trainer, [FromServices] AuthController controller) => controller.Register(trainer));
 
 app.Run();

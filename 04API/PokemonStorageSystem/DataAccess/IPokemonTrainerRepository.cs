@@ -6,7 +6,7 @@ public interface IPokemonTrainerRepository
 {
     List<PokeTrainer> GetAllTrainers();
 
-    PokeTrainer GetPokeTrainer(string name);
+    Task<PokeTrainer> GetPokeTrainer(string name);
 
     PokeTrainer GetPokeTrainer(int id);
 

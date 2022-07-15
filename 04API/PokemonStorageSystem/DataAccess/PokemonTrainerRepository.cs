@@ -15,6 +15,13 @@ namespace DataAccess;
 public class PokemonTrainerRepository : IPokemonTrainerRepository
 {
     private readonly ConnectionFactory _connectionFactory;
+
+    //for use with console application and reading connection string from a file
+    public PokemonTrainerRepository()
+    {
+        _connectionFactory = ConnectionFactory.GetInstance(File.ReadAllText("../DataAccess/connectionString.txt"));
+    }
+    //To use with asp.net core application, reading the connection string from the appsettings.json and utilizing asp.net core's dep injector
     public PokemonTrainerRepository(ConnectionFactory factory)
     {
         _connectionFactory = factory;
@@ -56,7 +63,7 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
     /// <param name="name">exact name to search for</param>
     /// <returns>found Pokemon trainer object</returns>
     /// <exception cref="RecordNotFoundException">when there is no trainer with such name</exception>
-    public PokeTrainer GetPokeTrainer(string name)
+    public async Task<PokeTrainer> GetPokeTrainer(string name)
     {
         PokeTrainer foundTrainer;
         SqlConnection conn = _connectionFactory.GetConnection();
@@ -76,7 +83,7 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
         SqlDataReader reader = cmd.ExecuteReader();
 
         //while there are more rows to read
-        while(reader.Read())
+        while(await reader.ReadAsync())
         {
             return new PokeTrainer
             {

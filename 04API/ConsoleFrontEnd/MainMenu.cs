@@ -1,16 +1,16 @@
 using Models;
-using Services;
 using System.Text.Json;
+using System.Text;
 using CustomExceptions;
+using System.Net.Http;
 
 namespace UI;
 
 public class MainMenu
 {
-    private readonly AuthService _auth;
-    public MainMenu(AuthService auth)
+    private readonly string api = "https://localhost:7278/";
+    public MainMenu()
     {
-        _auth = auth;
     }
     public async Task Start()
     {
@@ -71,9 +71,31 @@ public class MainMenu
         //UI's job is now done, we now send it off to actually be registered somewhere else.
         try
         {
-            PokeTrainer trainer = await _auth.Register(registeringTrainer);
-            Console.WriteLine("Registered successfully!");
-            Console.WriteLine(trainer.Id + ": " + trainer.Name);
+            string serializedTrainer = JsonSerializer.Serialize(registeringTrainer);
+            StringContent content = new StringContent(serializedTrainer, Encoding.UTF8, "application/json");
+            HttpClient http = new HttpClient();
+            HttpResponseMessage response = await http.PostAsync(api + "register", content);
+
+            if((int) response.StatusCode == 201)
+            {
+                //send http POST request to my backend(api) to do the job for me
+                PokeTrainer trainer = JsonSerializer.Deserialize<PokeTrainer>(await response.Content.ReadAsStringAsync());
+                Console.WriteLine("Registered successfully!");
+                Console.WriteLine(trainer.Id + ": " + trainer.Name);
+            }
+            else if((int) response.StatusCode == 409)
+            {
+                Console.WriteLine("The username is already taken");
+            }
+            else if((int) response.StatusCode == 400)
+            {
+                Console.WriteLine("Name is required");
+            }
+            else
+            {
+                Console.WriteLine("Something is not quite right, please try again");
+            }
+
         }
         catch(JsonException ex)
         {

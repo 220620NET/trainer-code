@@ -3,4 +3,4 @@ using Services;
 using DataAccess;
 
 //Dependency injection
-new MainMenu(new AuthService(new PokemonTrainerRepository())).Start();
+await new MainMenu(new AuthService(new PokemonTrainerRepository())).Start();

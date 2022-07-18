@@ -11,7 +11,7 @@ public class AuthController
         _service = service;
     }
 
-    public IResult Register(PokeTrainer trainerToRegister)
+    public async Task<IResult> Register(PokeTrainer trainerToRegister)
     {
         if (trainerToRegister.Name == null)
         {
@@ -19,7 +19,7 @@ public class AuthController
         }
         try
         {
-            _service.Register(trainerToRegister);
+            await _service.Register(trainerToRegister);
             return Results.Created("/register", trainerToRegister);
         }
         catch (DuplicateRecordException)

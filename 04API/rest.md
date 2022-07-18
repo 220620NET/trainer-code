@@ -21,3 +21,7 @@ it's a more modularized way of designing your application- instead of your serve
     - Each layer in your server should only know the layer beyond
 - Code on Demand (Optional)
     - Your server can also serve code snippets instead of text
+- HATEOAS (Hypermedia As The Engine Of Application State) (optional)
+    - a curated menu
+    - This is an optional feature of RESTful API where the server guides the user on what they can do based on the last request
+    - In the server response, the server includes information about other endpoints the client can use based off of their current state

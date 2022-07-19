@@ -46,6 +46,18 @@ public class PokemonService
         }
     }
 
+    public Pokemon ViewPokemon(int pokemonId)
+    {
+        try
+        {
+            return _repo.GetPokemonByPokemonId(pokemonId);
+        } 
+        catch(RecordNotFoundException)
+        {
+            throw;
+        }
+    }
+
     public Pokemon DepositPokemon(Pokemon newPokemon)
     {
         return _repo.AddPokemon(newPokemon);

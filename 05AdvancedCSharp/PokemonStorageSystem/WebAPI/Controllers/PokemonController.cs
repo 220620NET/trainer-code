@@ -38,8 +38,29 @@ public class PokemonController
         }
     }
 
-    public Pokemon DepositPokemon(Pokemon newPokemon)
+    public IResult DepositPokemon(Pokemon newPokemon)
     {
-        return _service.DepositPokemon(newPokemon);
+        if(String.IsNullOrWhiteSpace(newPokemon.Name))
+        {
+            return Results.BadRequest("Name cannot be empty");
+        }
+        else if(newPokemon.TrainerId <= 0)
+        {
+            return Results.BadRequest("Please enter valid trainer id");
+        }
+        Pokemon createdPoke = _service.DepositPokemon(newPokemon);
+        return Results.Created($"pokemon/{createdPoke.Id}", createdPoke);
+    }
+
+    public IResult ViewPokemon(int pokemonId)
+    {
+        try
+        {
+            return Results.Ok(_service.ViewPokemon(pokemonId));
+        }
+        catch(RecordNotFoundException)
+        {
+            return Results.NoContent();
+        }
     }
 }

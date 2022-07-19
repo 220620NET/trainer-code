@@ -43,30 +43,63 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapGet("/", () => "Hi Auryn!");
+//-------------------------Auth Controller--------------------------
+//When we ask for a reference type such as PokeTrainer as a payload
+//the framework will expect to receive this in the request body
+//The ASP.NET Core will take the json data and turn it into PokeTrainer
+//using JsonSerializer from System.Text.Json namespace
+app.MapPost("/auth/register", async (PokeTrainer trainer, [FromServices] AuthController controller) => await controller.Register(trainer));
 
-//the curly braces are the route parameters 
-app.MapGet("/greet/{name}", ([FromRoute]string name) => {
-    return $"Hi {name}!";
-});
+/// <summary>
+/// searches trainer by their name and returns trainer information if found
+/// </summary>
+/// <param name="trainerToLogin">PokeTrainer object with name (required)</param>
+/// <returns>200 OK if trainer is found, 204 NoContent if there is no trainer, 400 BadRequest if the name is null</returns>
+app.MapPost("/auth/login", async (PokeTrainer trainerToLogin, AuthController controller) => await controller.Login(trainerToLogin));
 
-////Query parameter: these are key value pairs you pass in with your url after the question mark(?)
-app.MapGet("/greet", ([FromQuery] string name, string location) =>
-{
-    if (String.IsNullOrWhiteSpace(location))
-        return $"Hello {name}";
-    return $"Hello {name} from {location}";
-});
+
+//------------------- Pokemon Trainer Controller -----------------------
 
 /// <summary>
 /// Returns all pokemon trainers in the db
 /// </summary>
 app.MapGet("/trainers", (PokemonTrainerController controller) => controller.GetAllTrainers());
 
-//When we ask for a reference type such as PokeTrainer as a payload
-//the framework will expect to receive this in the request body
-//The ASP.NET Core will take the json data and turn it into PokeTrainer
-//using JsonSerializer from System.Text.Json namespace
-app.MapPost("/register", (PokeTrainer trainer, [FromServices] AuthController controller) => controller.Register(trainer));
+//--------------------Pokemon Controller-------------------------
+
+/// <summary>
+/// Gets all pokemons
+/// </summary>
+/// <param name="trainerId">optional query parameter to filter results by trainer id</param>
+/// <returns>200 OK with data if there is data, 204 NoContent if there is none</returns>
+app.MapGet("/pokemon", (int? trainerId, PokemonController controller) => 
+{
+    if(trainerId == null)
+    {
+        controller.GetAllPokemons();
+    }
+    else
+    {
+        controller.GetPokemonsByTrainerId((int) trainerId);
+    }
+});
+
+
+
+/// <summary>
+/// Deposits a new pokemon to a particular trainer
+/// </summary>
+/// <param name="pokemonToDeposit">Pokemon object in json format, name and trainer id is required</param>
+/// <returns>201 with Deposited Pokemon, 400 if either name or trainer id is missing</returns>
+app.MapPost("/pokemon", ([FromBody] Pokemon pokemonToDeposit, PokemonController controller) => controller.DepositPokemon(pokemonToDeposit));
+
+/// <summary>
+/// Gets a specific pokemon by their id
+/// </summary>
+/// <param name="pokemonId">integer representation of a pokemon's unique id</param>
+/// <returns>200 OK with pokemon data if found, if not 204 NoContent</returns>
+app.MapGet("/pokemon/{pokemonId}",([FromRouteAttribute] int pokemonId, PokemonController controller) => controller.ViewPokemon(pokemonId));
+
+
 
 app.Run();

@@ -27,4 +27,20 @@ public class AuthController
             return Results.Conflict("Trainer with this name already exists");
         }
     }
+
+        public async Task<IResult> Login(PokeTrainer trainerToLogin)
+    {
+        if (trainerToLogin.Name == null)
+        {
+            return Results.BadRequest("Name cannot be null");
+        }
+        try
+        {
+            return Results.Ok(await _service.LogIn(trainerToLogin));
+        }
+        catch (RecordNotFoundException)
+        {
+            return Results.NoContent();
+        }
+    }
 }

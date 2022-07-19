@@ -47,6 +47,7 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
             {
                 Id = (int)reader["trainer_id"],
                 Name = (string)reader["trainer_name"],
+                NumBadges = (int) reader["num_badges"],
                 Money = Convert.ToDecimal((double)reader["trainer_money"]),
                 DoB = (DateTime) reader["date_of_birth"]
             });

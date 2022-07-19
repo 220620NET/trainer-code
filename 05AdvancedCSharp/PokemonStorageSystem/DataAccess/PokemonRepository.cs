@@ -17,9 +17,11 @@ public class PokemonRepository : IPokemonRepository
         List<Pokemon> pokes = new();
         using SqlCommand command = new SqlCommand("Select * From Pokemons", _connectionFactory.GetConnection());
 
+        command.Connection.Open();
+
         using SqlDataReader reader = command.ExecuteReader();
 
-        if(reader.Read())
+        while(reader.Read())
         {
             pokes.Add(new Pokemon{
                 Id = (int) reader["pokemon_id"],
@@ -35,7 +37,10 @@ public class PokemonRepository : IPokemonRepository
 
     public Pokemon GetPokemonByPokemonId(int pokemonId)
     {
-        using SqlCommand command = new SqlCommand("Select * From Pokemons", _connectionFactory.GetConnection());
+        using SqlCommand command = new SqlCommand("Select * From Pokemons where pokemon_id = @id", _connectionFactory.GetConnection());
+        command.Parameters.AddWithValue("@id", pokemonId);
+        
+        command.Connection.Open();
         using SqlDataReader reader = command.ExecuteReader();
 
         if(reader.Read())
@@ -63,9 +68,11 @@ public class PokemonRepository : IPokemonRepository
         using SqlCommand command = new SqlCommand("Select * From Pokemons Where trainer_id = @id", _connectionFactory.GetConnection());
         command.Parameters.AddWithValue("@id", trainerId);
 
+        command.Connection.Open();
+
         using SqlDataReader reader = command.ExecuteReader();
 
-        if(reader.Read())
+        while(reader.Read())
         {
             pokes.Add(new Pokemon{
                 Id = (int) reader["pokemon_id"],
@@ -87,6 +94,8 @@ public class PokemonRepository : IPokemonRepository
         cmd.Parameters.AddWithValue("@lvl", poke.Level);
         cmd.Parameters.AddWithValue("@type", poke.Type);
         cmd.Parameters.AddWithValue("@tId", poke.TrainerId);
+        
+        cmd.Connection.Open();
 
         int insertedId = (int) cmd.ExecuteScalar();
 
@@ -100,6 +109,8 @@ public class PokemonRepository : IPokemonRepository
         using SqlCommand cmd = new SqlCommand("Delete From Pokemons Where pokemon_id = @pokeId", _connectionFactory.GetConnection());
 
         cmd.Parameters.AddWithValue("@pokeId", pokeId);
+        
+        cmd.Connection.Open();
 
         int rowsAffected = (int) cmd.ExecuteNonQuery();
 

@@ -34,12 +34,12 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
     public List<PokeTrainer> GetAllTrainers()
     {
         List<PokeTrainer> trainers = new List<PokeTrainer>();
-        SqlConnection conn = _connectionFactory.GetConnection();
+        using SqlConnection conn = _connectionFactory.GetConnection();
 
         conn.Open();
 
-        SqlCommand cmd = new SqlCommand("Select * From PokeTrainer", conn);
-        SqlDataReader reader = cmd.ExecuteReader();
+        using SqlCommand cmd = new SqlCommand("Select * From PokeTrainer", conn);
+        using SqlDataReader reader = cmd.ExecuteReader();
 
         while(reader.Read())
         {
@@ -51,8 +51,6 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
                 DoB = (DateTime) reader["date_of_birth"]
             });
         }
-        reader.Close();
-        conn.Close();
 
         return trainers;
     }
@@ -65,22 +63,21 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
     /// <exception cref="RecordNotFoundException">when there is no trainer with such name</exception>
     public async Task<PokeTrainer> GetPokeTrainer(string name)
     {
-        PokeTrainer foundTrainer;
-        SqlConnection conn = _connectionFactory.GetConnection();
+        using SqlConnection conn = _connectionFactory.GetConnection();
         conn.Open();
 
         //security hazard - do not do this
         // SqlCommand cmd = new SqlCommand($"Select * From PokeTrainer Where trainer_name = '{name}'", conn);
 
         //do this instead to prevent against sql injection
-        SqlCommand cmd = new SqlCommand("Select * From PokeTrainer Where trainer_name = @name", conn);
+        using SqlCommand cmd = new SqlCommand("Select * From PokeTrainer Where trainer_name = @name", conn);
 
         // SqlParameter param = new SqlParameter("@name", name);
         // cmd.Parameters.Add(param);
 
         cmd.Parameters.AddWithValue("@name", name);
 
-        SqlDataReader reader = cmd.ExecuteReader();
+        using SqlDataReader reader = cmd.ExecuteReader();
 
         //while there are more rows to read
         while(await reader.ReadAsync())
@@ -105,7 +102,24 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
     /// <returns>found poke trainer, if not null</returns>
     public PokeTrainer GetPokeTrainer(int id)
     {
-        throw new NotImplementedException();
+        using SqlCommand cmd = new SqlCommand("Select * From PokeTrainer Where trainer_id = @id", _connectionFactory.GetConnection());
+
+        cmd.Parameters.AddWithValue("@id", id);
+
+        using SqlDataReader reader = cmd.ExecuteReader();
+
+        if(reader.Read())
+        {
+            return new PokeTrainer
+            {
+                Id = (int) reader["trainer_id"],
+                Name = (string) reader["trainer_name"],
+                NumBadges = (int) reader["num_badges"],
+                Money = (decimal) reader["trainer_money"],
+                DoB = (DateTime) reader["date_of_birth"]
+            };
+        }
+        throw new RecordNotFoundException($"Pokemon Trainer with the id {id} has not been found");
     }
 
     /// <summary>
@@ -119,7 +133,7 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
         //DataSet is a container for the data adapter to fill with data it fetches with the select command
         DataSet pokeTrainerSet = new DataSet();
 
-        SqlDataAdapter trainerAdapter = new SqlDataAdapter("Select * From PokeTrainer",  _connectionFactory.GetConnection());
+        using SqlDataAdapter trainerAdapter = new SqlDataAdapter("Select * From PokeTrainer",  _connectionFactory.GetConnection());
 
         trainerAdapter.Fill(pokeTrainerSet, "trainerTable");
 
@@ -136,7 +150,7 @@ public class PokemonTrainerRepository : IPokemonTrainerRepository
 
             trainerTable.Rows.Add(newTrainer);
 
-            SqlCommand insertCommand = new SqlCommand("Insert into PokeTrainer (trainer_name, trainer_money, num_badges) OUTPUT INSERTED.trainer_id values (@name, @money, @badges)", _connectionFactory.GetConnection());
+            using SqlCommand insertCommand = new SqlCommand("Insert into PokeTrainer (trainer_name, trainer_money, num_badges) OUTPUT INSERTED.trainer_id values (@name, @money, @badges)", _connectionFactory.GetConnection());
             insertCommand.Parameters.Add("@name", SqlDbType.VarChar, 30, "trainer_name");
             insertCommand.Parameters.Add("@money", SqlDbType.Float, 32, "trainer_money");
             insertCommand.Parameters.Add("@badges", SqlDbType.Int, 50, "num_badges");

@@ -76,14 +76,13 @@ app.MapGet("/pokemon", (int? trainerId, PokemonController controller) =>
 {
     if(trainerId == null)
     {
-        controller.GetAllPokemons();
+        return controller.GetAllPokemons();
     }
     else
     {
-        controller.GetPokemonsByTrainerId((int) trainerId);
+        return controller.GetPokemonsByTrainerId((int) trainerId);
     }
 });
-
 
 
 /// <summary>
@@ -100,6 +99,6 @@ app.MapPost("/pokemon", ([FromBody] Pokemon pokemonToDeposit, PokemonController 
 /// <returns>200 OK with pokemon data if found, if not 204 NoContent</returns>
 app.MapGet("/pokemon/{pokemonId}",([FromRouteAttribute] int pokemonId, PokemonController controller) => controller.ViewPokemon(pokemonId));
 
-
+app.MapDelete("/pokemon/{pokemonId}", (int pokemonId, PokemonController controller) => controller.WithdrawPokemon(pokemonId));
 
 app.Run();

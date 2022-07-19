@@ -38,7 +38,7 @@ public class AuthController
         {
             return Results.Ok(await _service.LogIn(trainerToLogin));
         }
-        catch (RecordNotFoundException)
+        catch (InvalidCredentialException)
         {
             return Results.NoContent();
         }

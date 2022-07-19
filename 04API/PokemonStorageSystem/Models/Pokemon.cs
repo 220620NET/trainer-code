@@ -3,11 +3,17 @@ using CustomExceptions;
 namespace Models;
 public class Pokemon
 {
-    public Pokemon() {}
+    public Pokemon() {
+        _name = "";
+        _level = 0;
+        TrainerId = 0;
+        Type = "";
+    }
 
-    public Pokemon(string name)
+    //constructor chaining
+    public Pokemon(string name) : this()
     {
-        Name = name;
+        _name = name;
     }
     //what kind of data should I hold here?
     //IE Strengh, Name, Level, Exp, Hp, TrainerWhoCaughtThisOne, Type, NickName
@@ -56,7 +62,7 @@ public class Pokemon
 
     public string Type { get; set; }
 
-    public string NickName { get; set; }
+    public string? NickName { get; set; }
 
     public int Id { get; set; }
 

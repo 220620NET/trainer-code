@@ -11,6 +11,8 @@ public class PokeTrainer
     //Empty Constructor
     public PokeTrainer()
     {
+        Id = 0;
+        _name = "";
         NumBadges = 0;
         Money = 0;
     }
@@ -65,8 +67,9 @@ public class PokeTrainer
         return $"Name: {this.Name} \nNumBadges: {this.NumBadges} \nMoney: {Money}";
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
+        if(obj == null) return false;
         if(obj.GetType() == this.GetType())
         {
             //then they're both PokeTrainer objects!

@@ -30,4 +30,20 @@ public class AuthService
         }
     }
 
+    public async Task<PokeTrainer> LogIn(PokeTrainer trainerToFind)
+    {
+        try
+        {
+            PokeTrainer foundTrainer =  await _repo.GetPokeTrainer(trainerToFind.Name);
+            //I don't have pw set up here, so as long as their name exists they "login"
+            //However, if i were to have pw, i'd compare the pw of trainerToFind and foundTrainer and make sure they're the same before "logging them in"
+
+            return foundTrainer;
+        }
+        catch(RecordNotFoundException)
+        {
+            throw new InvalidCredentialException();
+        }
+    }
+
 }

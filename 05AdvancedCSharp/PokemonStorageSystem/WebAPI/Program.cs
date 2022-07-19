@@ -18,13 +18,23 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 //Singleton instances are shared throughtout the entire lifetime of the application
 //Scoped instances are shared during the req/res lifecycle
 //Transient instances are generated everytime it needs an instance of it
+//--------- Data Access------------
 builder.Services.AddSingleton<ConnectionFactory>(ctx => ConnectionFactory.GetInstance(builder.Configuration.GetConnectionString("PokeDB")));
 builder.Services.AddScoped<IPokemonTrainerRepository, PokemonTrainerRepository>();
-builder.Services.AddTransient<AuthService>();
-builder.Services.AddTransient<PokeTrainerService>();
+builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
+
+//----------Services---------------
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<PokeTrainerService>();
+builder.Services.AddScoped<PokemonService>();
+
+
+//----------Controllers------------
 builder.Services.AddScoped<AuthController>();
 builder.Services.AddScoped<PokemonTrainerController>();
+builder.Services.AddScoped<PokemonController>();
 
+//------------Swagger---------------
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

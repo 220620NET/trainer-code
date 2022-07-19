@@ -4,7 +4,7 @@ using CustomExceptions;
 
 namespace DataAccess;
 
-public class PokemonRepository
+public class PokemonRepository : IPokemonRepository
 {
     private readonly ConnectionFactory _connectionFactory;
 

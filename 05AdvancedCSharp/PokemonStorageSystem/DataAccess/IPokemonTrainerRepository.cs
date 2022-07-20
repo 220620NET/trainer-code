@@ -1,7 +1,6 @@
 using Models;
 
 namespace DataAccess;
-
 public interface IPokemonTrainerRepository
 {
     List<PokeTrainer> GetAllTrainers();

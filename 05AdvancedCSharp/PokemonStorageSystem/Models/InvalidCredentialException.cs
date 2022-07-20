@@ -1,3 +1,5 @@
+using CustomExceptions;
+
 [System.Serializable]
 public class InvalidCredentialException : System.Exception
 {

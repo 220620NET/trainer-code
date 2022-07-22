@@ -1,5 +1,5 @@
 # Technology Project: P2
-
+## Due Date: 8/19
 In the technology project (p2), you'll work as a small team to create a full stack application in one of the following themes: E-Commerce, Health Care Insurance, Banking, and Social Media. Each theme has a set of required features as well as optional stretch goals. Feel free to customize these themes to suit your fancy!
 
 ## Technology
@@ -13,6 +13,13 @@ In the technology project (p2), you'll work as a small team to create a full sta
 - Typescript
 - Github Action
 - Entity Framework Core
+
+## Other things you can do
+- External API
+- IDaaS (ex. Auth0 or Oauth) or ASP.NET Identity
+- Containerizing both your FE/BE - DevOps
+- Testing (FE/BE)
+
 
 ## E-Commerce
 ### Minimum Features
@@ -32,6 +39,7 @@ In the technology project (p2), you'll work as a small team to create a full sta
 - Dark mode
 - Tech Support Chat
 - Notifications
+
 ## Banking
 ### Minimum Features
 - Login

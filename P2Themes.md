@@ -1,4 +1,5 @@
 # Technology Project: P2
+## [Trello Workspace](https://trello.com/220620net)
 ## Due Date: 8/19
 In the technology project (p2), you'll work as a small team to create a full stack application in one of the following themes: E-Commerce, Health Care Insurance, Banking, and Social Media. Each theme has a set of required features as well as optional stretch goals. Feel free to customize these themes to suit your fancy!
 
@@ -19,7 +20,6 @@ In the technology project (p2), you'll work as a small team to create a full sta
 - IDaaS (ex. Auth0 or Oauth) or ASP.NET Identity
 - Containerizing both your FE/BE - DevOps
 - Testing (FE/BE)
-
 
 ## E-Commerce
 ### Minimum Features

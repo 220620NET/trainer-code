@@ -27,7 +27,7 @@ aka run `dotnet add package package-name`
 - `dotnet tool install --global dotnet-ef`
 
 ## DbContext Class
-DbContext is essentially EFCore's idea of the db structure
+DbContext is essentially EFCore's representation of db connection/db structure
 In code first, we need to create our own DbContext to let EFCore know, which tables to create with which columns, keys, constraints, etc. However, EFCore just like ASP.NET has a lot of default behaviors, so as long as your model classes follow a certain convention, it will be able to figure it out on its own.
 
 ## Migrations (Code first approach)

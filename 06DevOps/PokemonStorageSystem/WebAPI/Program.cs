@@ -22,8 +22,8 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 //--------- Data Access------------
 builder.Services.AddDbContext<PokeDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EFCorePokeDB")));
 builder.Services.AddSingleton<ConnectionFactory>(ctx => ConnectionFactory.GetInstance(builder.Configuration.GetConnectionString("PokeDB")));
-builder.Services.AddScoped<IPokemonTrainerRepository, PokemonTrainerRepository>();
-builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
+builder.Services.AddScoped<IPokemonTrainerRepository, EFCPokeTrainerRepo>();
+builder.Services.AddScoped<IPokemonRepository, EFCPokemonRepo>();
 
 //----------Services---------------
 builder.Services.AddScoped<AuthService>();

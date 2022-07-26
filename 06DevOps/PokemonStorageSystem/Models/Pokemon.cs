@@ -62,6 +62,8 @@ public class Pokemon
 
     public string Type { get; set; }
 
+    public string? Disposition { get; set; }
+
     public string? NickName { get; set; }
 
     public int Id { get; set; }

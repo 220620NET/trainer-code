@@ -31,7 +31,7 @@ public class PokemonController
         try
         {
             return Results.Ok(_service.WithdrawPokemon(pokemonId));
-        } 
+        }
         catch(RecordNotFoundException)
         {
             return Results.NoContent();

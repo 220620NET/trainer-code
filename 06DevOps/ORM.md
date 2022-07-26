@@ -31,7 +31,7 @@ In code first, we need to create our own DbContext to let EFCore know, which tab
 ## Migrations
 Is a way to get from one state of DB to new state of DB due to the changes in model
 1. Add your version DbContext in Data Access Layer
-2. Add that DbContext to the dependency injector in Program.cs of ASP.NET core application. (using builder.Service.AddDbContext<yourDbContextClass>();)
+2. Add that DbContext to the dependency injector in Program.cs of ASP.NET core application. (`builder.Service.AddDbContext<yourDbContextClass>();`)
 3. Run these commands in DataAccess layer, and your application needs to build prior to doing any of these.
 To create migration:
 `dotnet ef migrations add <name of migration> -c <implemented db-context>  --startup-project <location of startup project>`
@@ -39,3 +39,10 @@ In order to apply the migration to your DB:
 `dotnet ef database update --startup-project <location of startup project>`
 
 Whenever your model changes, run the migration again.
+
+## Reverse Engineering (Reflecting changes in DB to your code)
+- run this in Data Access Layer:
+```
+dotnet ef dbcontext scaffold <connection-string-in-double-quotes> Microsoft.EntityFrameworkCore.SqlServer --startup-project <path to project folder> --force --output-dir Entities --no-onconfiguring
+```
+- Every time your db structure changes, run that code

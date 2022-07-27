@@ -18,38 +18,39 @@ public class EFCPokemonRepo : IPokemonRepository
         _context.Add(poke);
         _context.SaveChanges();
 
-        //clear the change tracker
-        _context.ChangeTracker.Clear();
-
         return poke;
     }
 
     public bool DeletePokemon(int pokeId)
     {
-        Pokemon? pokemonToDelete = _context.Pokemons.AsNoTracking().FirstOrDefault(p => p.Id == pokeId);
-        if(pokemonToDelete != null) 
+        try
         {
-            _context.Pokemons.Remove(pokemonToDelete);
+            // Pokemon poke = _context.Pokemons.FirstOrDefault(p => p.Id == pokeId);
+            // _context.Entry<Pokemon>(poke).State = EntityState.Deleted;
+            _context.Remove(new Pokemon{Id = pokeId});
             _context.SaveChanges();
-            _context.ChangeTracker.Clear();
             return true;
+
         }
-        return false;
+        catch
+        {
+            return false;
+        }
     }
 
     public List<Pokemon> GetAllPokemons()
     {
-        return _context.Pokemons.AsNoTracking().ToList();
+        return _context.Pokemons.ToList();
     }
 
     public Pokemon GetPokemonByPokemonId(int pokemonId)
     {
         
-        return _context.Pokemons.AsNoTracking().FirstOrDefault(p => p.Id == pokemonId) ?? throw new RecordNotFoundException("No pokemon was found with this id");
+        return _context.Pokemons.FirstOrDefault(p => p.Id == pokemonId) ?? throw new RecordNotFoundException("No pokemon was found with this id");
     }
 
     public List<Pokemon> GetPokemonsByTrainerId(int trainerId)
     {
-        return _context.Pokemons.AsNoTracking().Where(p => p.TrainerId == trainerId).ToList();
+        return _context.Pokemons.Where(p => p.TrainerId == trainerId).ToList();
     }
 }

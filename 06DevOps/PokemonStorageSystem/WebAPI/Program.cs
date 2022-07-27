@@ -20,6 +20,7 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 //Scoped instances are shared during the req/res lifecycle
 //Transient instances are generated everytime it needs an instance of it
 //--------- Data Access------------
+//Our DbContext is Scoped --> aka, it is created for each and every request 
 builder.Services.AddDbContext<PokeDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EFCorePokeDB")));
 builder.Services.AddSingleton<ConnectionFactory>(ctx => ConnectionFactory.GetInstance(builder.Configuration.GetConnectionString("PokeDB")));
 builder.Services.AddScoped<IPokemonTrainerRepository, EFCPokeTrainerRepo>();

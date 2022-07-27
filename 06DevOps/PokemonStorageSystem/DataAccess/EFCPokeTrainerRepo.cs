@@ -20,14 +20,13 @@ public class EFCPokeTrainerRepo : IPokemonTrainerRepository
 
         //Persists everything added so far to the change tracker to the db
         _context.SaveChanges();
-        _context.ChangeTracker.Clear();
         //return the newly registered pokemon trainer
         return newTrainerToRegister;
     }
 
     public List<PokeTrainer> GetAllTrainers()
     {
-        return _context.PokeTrainers.AsNoTracking().ToList();
+        return _context.PokeTrainers.ToList();
     }
 
     public async Task<PokeTrainer> GetPokeTrainer(string name)
@@ -42,7 +41,7 @@ public class EFCPokeTrainerRepo : IPokemonTrainerRepository
 
     public PokeTrainer GetPokeTrainer(int id)
     {
-        PokeTrainer? foundTrainer = _context.PokeTrainers.AsNoTracking().FirstOrDefault(trainer => trainer.Id == id);
+        PokeTrainer? foundTrainer = _context.PokeTrainers.FirstOrDefault(trainer => trainer.Id == id);
 
         if(foundTrainer != null) return foundTrainer;
 

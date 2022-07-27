@@ -6,10 +6,10 @@ is a containerization platform (aka tool to containerize applications) that allo
 
 # Terms
 - docker engine
-    - is the deamon (the thing that sits in the background idly and wait for work) that actually runs all docker commands
+    - is the daemon(the thing that sits in the background idly and wait for work) that actually runs all docker commands
 
 - dockerfile
-    - Is a file of instruction to docker engine in order to create a file system (or Image) that has everything you need to run your app (your app, your dependencies, your runtime, etc.)
+    - Is a file of instructions to docker engine in order to create a file system (or Image) that has everything you need to run your app (your app, your dependencies, your runtime, etc.)
     - in dockerfiles, we put stuff like which run time to use, how to build our application, and what to do when someone runs the image
 
 - dockerignore
@@ -52,3 +52,5 @@ is a containerization platform (aka tool to containerize applications) that allo
     - `docker push image-name`
 - To build our image from dockerfile
     - `docker build`
+    - `docker build relative-path-to-dockerfile -t dockerhubusername/imagename:tag-name`
+    - ex: `docker build . sminseonong/pokestorage:latest`

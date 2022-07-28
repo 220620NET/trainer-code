@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+# When to run this particular pipeline
+on:
+# runs on pushes to "main" and "staging" branch
+  push:
+    branches: [ "main", "staging"]
+# runs whenever pr has been raised to main or staging branch
+  pull_request:
+    branches: [ "main", "staging"]
+# allows me to manually trigger this pipeline
+  workflow_dispatch:
+
+# Just a way to bundle a certain commands together into a unit
+jobs:
+# a job's name
+  build:
+
+    # Which VM/environment should these commands run
+    runs-on: ubuntu-latest
+
+    # what to do in this job("build")
+    steps:
+    # First checkout our repository (aka get our code)
+    - uses: actions/checkout@v3
+    
+    # Get .NET SDK
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        
+    # Restore our dependencies
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    # Try building the app
+    - name: Build
+      run: dotnet build --no-restore
+    
+    # Make sure all tests pass
+    - name: Test
+      run: dotnet test --no-build --verbosity normal

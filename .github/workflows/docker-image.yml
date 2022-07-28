@@ -34,3 +34,16 @@ jobs:
         file: 06DevOps/PokemonStorageSystem/dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/pokestorage:${{github.sha}}
+  deploy:
+    
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Azure WebApp Deployment
+        uses: Azure/webapps-deploy@v2
+        with:
+          # Name of the Azure Web App
+          app-name: pokestoragedocker 
+          # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
+          publish-profile: ${{secrets.DOCKER_AZURE_PUBLISH_PROFILE}}
+          # Applies to Web App Containers only: Specify the fully qualified container image(s) name. For example, 'myregistry.azurecr.io/nginx:latest' or 'python:3.7.2-alpine/'. For multi-container scenario multiple container image names can be provided (multi-line separated)
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/pokestorage:${{github.sha}}

@@ -33,4 +33,4 @@ jobs:
         context: 06DevOps/PokemonStorageSystem
         file: 06DevOps/PokemonStorageSystem/dockerfile
         push: true
-        tags: sminseonogn/pokestorage:${{github.sha}}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/pokestorage:${{github.sha}}

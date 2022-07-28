@@ -30,6 +30,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v3
       with:
+        context: 06DevOps/PokemonStorageSystem
         file: 06DevOps/PokemonStorageSystem/dockerfile
         push: true
         tags: sminseonogn/pokestorage:${{github.sha}}

@@ -40,4 +40,4 @@ jobs:
     
     # Make sure all tests pass
     - name: Test
-      run: dotnet test 06DevOps/PokemonStorageSystem/Tests --no-build --verbosity normal
+      run: dotnet test 06DevOps/PokemonStorageSystem/Tests --verbosity normal

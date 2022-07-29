@@ -1,6 +1,7 @@
 using Models;
 using Microsoft.Data.SqlClient;
 
+namespace DataAccess;
 //This class utilizes singleton and factory design pattern
 public class ConnectionFactory
 {

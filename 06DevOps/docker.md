@@ -1,10 +1,10 @@
 # Docker
 is a containerization platform (aka tool to containerize applications) that allows developers to package their application alongside with their dependencies in one convenient place!
 
-# Containerization
-- Is a way to provide *uniform environment* to run our app regardless of whichever machine we end up in.
+## Containerization
+Is a way to provide *uniform environment* to run our app regardless of whichever machine we end up in.
 
-# Terms
+## Terms
 - docker engine
     - is the daemon(the thing that sits in the background idly and wait for work) that actually runs all docker commands
 
@@ -19,7 +19,7 @@ is a containerization platform (aka tool to containerize applications) that allo
     - Is a **file system** that contains your application artifacts, your dependencies, runtime, reverse proxy, etc, whatever you need to run your application
 
 - Tag
-    Tag is a way to differentiate between different versions of the same image. 
+    - Tag is a way to differentiate between different versions of the same image. 
     We can use tag to discern between different builds (ie does this image have the latest changes?). Other times people use it to provide different versions to users (such .NET SDK docker image)
 
 - Container
@@ -32,7 +32,7 @@ is a containerization platform (aka tool to containerize applications) that allo
 
 - both containers and virtual machines achieve the same goal -> being able to run isolated environments regardless of host machine
 
-# Docker CLI Commands
+## Docker CLI Commands
 - To run local images:
     -`docker run image-name`
     - `-d` "detached" runs the container in the background
@@ -41,7 +41,7 @@ is a containerization platform (aka tool to containerize applications) that allo
 - To see all your local images:
     - `docker image ls`
 - to remove your local image
-    - `docker image rm image-name`
+    - `docker image rm image-name-or-image-id`
 - the above two commands are the same for containers as well
     - `docker container ls`
     - `docker container rm container-id`
@@ -52,5 +52,5 @@ is a containerization platform (aka tool to containerize applications) that allo
     - `docker push image-name`
 - To build our image from dockerfile
     - `docker build`
-    - `docker build relative-path-to-dockerfile -t dockerhubusername/imagename:tag-name`
+    - `docker build relative-path-to-folder-containing-dockerfile -t dockerhubusername/imagename:tag-name`
     - ex: `docker build . sminseonong/pokestorage:latest`

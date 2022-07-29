@@ -89,6 +89,6 @@ public class PokeTrainer
 
     public override int GetHashCode()
     {
-        return base.GetHashCode();
+        return Id.GetHashCode();
     }
 }

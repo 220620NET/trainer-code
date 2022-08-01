@@ -11,12 +11,12 @@
 - Elements
     - The basic component of html
 - Attributes
+    - Additional values that configure elements or adjust their behaviors (akin to flags in terminal commands) 
     - Global
         - attributes that can be used on any elements
-        - id, class, style, etc.
-    - Local
-        - attributes that are specific to certain elements
-        - src, href, etc.
+        - id, class
+        - style
+        - all event handlers (onclick, etc)
 
 ### Anatomy of a web page
 - html

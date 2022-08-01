@@ -43,11 +43,17 @@
 - External: a separate CSS file through Link tag
 
 ### Selectors
-if you remember 1 thing about CSS, remember this
+*If you remember 1 thing about CSS, remember this*
+
+Selector is a way to target stylings to one or more elements
 - Tag selector
 - Id Selector
 - Class Selector
-- Combination selector
+- [Combinator](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Combinators)
+    - Descendant
+    - Child
+    - Adjacent sibling 
+    - General Sibling 
 - Pseudo-class
 - Pseudo-element
 

@@ -1,0 +1,41 @@
+body {
+    background-color: green;
+}
+
+body {
+    background-color: aliceblue;
+}
+/* Tag selector */
+body {
+    background-color: cornsilk;
+}
+
+/* Id selector (#) */
+#heading-example {
+    font-style: italic;
+}
+
+h1 {
+    font-style: normal;
+    /* display: none; */
+}
+
+/* class selector (.) */
+.content {
+    background-color: #ffffff;
+}
+
+/* descendent selector (>) */
+/* #heading-example > h1 {
+
+} */
+a {
+    color: green;
+}
+
+a:visited {
+    color: black;
+}
+li:hover {
+    cursor: pointer;
+}

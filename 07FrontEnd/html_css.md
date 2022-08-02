@@ -40,7 +40,7 @@
 ### Including CSS in your HTML
 - Inline: Style attribute
 - Internal: Style Tag
-- External: a separate CSS file through Link tag
+- *External*: a separate CSS file through Link tag
 
 ### Selectors
 *If you remember 1 thing about CSS, remember this*
@@ -59,17 +59,18 @@ Selector is a way to target stylings to one or more elements
 
 ### Rules
 Key-value pair for styles
+
 ### Applying Styles: Cascading, Inheritance
 #### Cascading in CSS
 #### Specificity
 #### Inheriting Style
 
-### Box Model
+### Box Model (very common qc question)
 - Margin
 - Border
 - Padding
 - Content
 
 ### Responsive Web Design
-
-#### Bootstrap
+This is a design principle that no matter the screen size, the webpages should re-organize themselves to provide good ux(user experience)
+#### (Bootstrap)[https://getbootstrap.com/]

@@ -3,30 +3,34 @@ function analyzeName() {
     let nameInput = elem.value;
 
     if(nameInput) {
-        console.log('nameInput is truthy');
-        //send an http call
-        // XMLHttpRequest (readystate 0)
-        let xhr = new XMLHttpRequest();
-        //configure your request (readystate 1)
-        xhr.open('GET', 'https://api.agify.io/?name=' + nameInput, true);
-        //send your request (readystate 2)
-        xhr.send();
+        // //send an http call
+        // // XMLHttpRequest (readystate 0)
+        // let xhr = new XMLHttpRequest();
+        // //configure your request (readystate 1)
+        // xhr.open('GET', 'https://api.agify.io/?name=' + nameInput, true);
+        // //send your request (readystate 2)
+        // xhr.send();
 
-        //5 stages/readystates in every xhr request
-        //0 : Uninitialized
-        //1 : loading (we've successfully found the server, and we've opened the connection)
-        //2 : loaded (server received the request, and the send method has been called)
-        //3 : interactive (we are in middle of processing this request), currently receiving the response body
-        //4 : Complete (the response has been received)
+        // //5 stages/readystates in every xhr request
+        // //0 : Uninitialized
+        // //1 : loading (we've successfully found the server, and we've opened the connection)
+        // //2 : loaded (server received the request, and the send method has been called)
+        // //3 : interactive (we are in middle of processing this request), currently receiving the response body
+        // //4 : Complete (the response has been received)
 
-        xhr.onreadystatechange = function() {
-            if(this.readyState === 4 && this.status === 200) {
-                let response = JSON.parse(this.response);
-                document.querySelector('#result-name').innerText = response.name;
-                document.getElementById('result-age').innerText = response.age;
-            }
-        }
+        // xhr.onreadystatechange = function() {
+        //     if(this.readyState === 4 && this.status === 200) {
+        //         let response = JSON.parse(this.response);
+        //         document.querySelector('#result-name').innerText = response.name;
+        //         document.getElementById('result-age').innerText = response.age;
+        //     }
+        // }
         // Fetch API
+        fetch('https://api.agify.io/?name=' + nameInput).then((response) => response.json()).then((resBody) => {
+            document.querySelector('#result-name').innerText = resBody.name;
+            document.getElementById('result-age').innerText = resBody.age;
+        }).catch((err) => console.error(err));
+        //behaviors here won't wait until the promise resolves
     }
 }
 

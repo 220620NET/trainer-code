@@ -1,0 +1,12 @@
+.form-container {
+    margin: 10px 20px;
+}
+
+/* Descendent selector: select the button element that is child of the element that have class name-input */
+.name-input > button {
+    margin-top: 5px;
+}
+
+.result-container {
+    margin-top: 2em;
+}

@@ -44,3 +44,20 @@ JS primarily interacts with HTML/DOM through events. Browsers keeps track of man
 Once the event reaches the target element, it "bubbles" up to the window. As it bubbles up, it can trigger all of its parents related event handler. When this behavior is not desired, we call event.stopPropagation() method to stop the event from invoking all the parent element's event handlers.
 
 ## Making HTTP Calls
+- XML Http Request
+- Fetch API
+
+## JS Object vs JSON
+JSON is a notation to transport data derived from JS objects.
+JSON is more strict in formatting than js objects:
+- the keys must be string and use double quotes
+- there cannot be trailing comma (the comma at the end of the last property)
+- and more...
+
+## Storage
+- cookie
+- Web Storage API
+    - Local Storage
+        - this persists through sessions
+    - Session Storage
+        - gets wiped when the user closes the tab

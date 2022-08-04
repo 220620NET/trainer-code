@@ -34,7 +34,10 @@ function analyzeName(e, callback) {
         //behaviors here won't wait until the promise resolves
 
         const reqArr = ['https://api.agify.io/?name=' + nameInput, 'https://api.genderize.io?name=' + nameInput, 'https://api.nationalize.io?name=' + nameInput];
-        Promise.all([fetch(reqArr[0]).then((res) => res.json()), fetch(reqArr[1]).then((res) => res.json()), fetch(reqArr[2]).then((res) => res.json())]).then((data) => {
+        // Promise.all([fetch(reqArr[0]).then((res) => res.json()), fetch(reqArr[1]).then((res) => res.json()), fetch(reqArr[2]).then((res) => res.json())])
+        
+        //refactoring the above long Promise.all call to utilize js's Array.map() method (this is akin to C# array's foreach method or LINQ's select method)
+        Promise.all(reqArr.map((url) => fetch(url).then((res) => res.json()))).then((data) => {
             console.log(data);
             //format the data
             responseData = {

@@ -41,7 +41,7 @@ Is how CSS and JS interacts with HTML elements. It is a tree-like structure that
 JS primarily interacts with HTML/DOM through events. Browsers keeps track of many different types of events and users can attach their event handlers (js function made to respond to a certain event) to these events
 
 ### Event Propagation
-Once the event reaches the target element, it "bubbles" up to the window. As it bubbles up, it can trigger all of its parents related event handler. When this behavior is not desired, we call event.stopPropagation() method to stop the event from invoking all the parent element's event handlers.
+Once the event reaches the target element, it "bubbles" up to the window. As it bubbles up, it can trigger all of its parents related event handler. When this behavior is not desired, we call event.stopPropagation() method.
 
 ## Making HTTP Calls
 - XML Http Request

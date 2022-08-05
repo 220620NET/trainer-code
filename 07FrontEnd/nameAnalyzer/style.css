@@ -2,7 +2,7 @@
     margin: 10px 20px;
 }
 
-/* Descendent selector: select the button element that is child of the element that have class name-input */
+/* Descendent selector: select all button elements that are children of the elements that have the class name-input */
 .name-input > button {
     margin-top: 5px;
 }

@@ -38,7 +38,7 @@ Introduced in ES6:
 Is how CSS and JS interacts with HTML elements. It is a tree-like structure that provides interface for css and js to perform CRUD operations on elements.
 
 ## Events
-JS primarily interacts with HTML/DOM through events. Browsers keeps track of many different types of events and users can attach their event handlers (js function made to respond to a certain event) to these events
+JS primarily interacts with HTML/DOM through events. Browsers keeps track of many different types of events and developers can attach their event handlers (js function made to respond to a certain event) to these events
 
 ### Event Propagation
 Once the event reaches the target element, it "bubbles" up to the window. As it bubbles up, it can trigger all of its parents related event handler. When this behavior is not desired, we call event.stopPropagation() method.
@@ -61,3 +61,36 @@ JSON is more strict in formatting than js objects:
         - this persists through sessions
     - Session Storage
         - gets wiped when the user closes the tab
+
+## Modules
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+https://github.com/mdn/js-examples/tree/master/module-examples/basic-modules
+- `type="module` in script tag
+- specify what you want to import
+- specify what you want to export 
+
+
+## Inheritance
+### Prototypal Inheritance
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+### Classes and OOP in JS
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+Few differences
+- Must declare all properties in constructor
+- no access modifiers
+- you'll most likely want to call the base class' constructor using `super` keyword 
+
+## This keyword in JS
+https://www.w3schools.com/js/js_this.asp
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this
+The meaning of `this` changes depending on context...
+you can also change the context using .call(), .apply(), .bind() methods
+
+## Hoisting
+JS keeps a lexical environment (a phone book for all variable/function names) that it creates during "compilation" stage (before it runs the code). Depending on how you declare your variable/functions, different things get hoisted.
+- Function Declaration: both the function name and the definition gets hoisted (aka registered in lexical environment) which means, you can use this function before the declaration line appears
+- var keyword: only the variable name is hoisted, the actual content is not initialized until it reaches the initialization step. If you try to use it earlier than the declaration, you will get undefined
+- let: it is still being hoisted, but the program will prevent you from using the variable before initialization step.
+
+
+- To prevent all of this,.... just please declare and initialize your variables/functions before you use them.

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 (function () {
     console.log('hello world!');
     let foo = 'bar';
@@ -16,6 +17,11 @@
     any = {};
     any = false;
     any = null;
+    //unknown lets you assign anything in that variable but you can't assign unknown to a statically typed var
+    let unknownVar;
+    // unknownVar = 'string';
+    unknownVar = 3;
+    num = unknownVar;
     //union type
     let numOrString = 'string';
     numOrString = 3;
@@ -24,6 +30,30 @@
     date = Date.now();
     console.log(date);
     console.log(foo);
+    let fc;
+    let poke = {
+        id: 1,
+        name: 'Pikachu',
+        level: 5,
+        trainerId: 1,
+        type: 'electric'
+    };
+    let pokeTwo = {
+        name: 'Pikachu',
+        level: 5,
+        trainerId: 1,
+        type: 'electric'
+    };
+    let pokeThree = {
+        name: 'Snorlax',
+        level: 5,
+        trainerId: 1,
+        type: 'electric',
+        temperament: 'gentle',
+        id: 2,
+        dateCatched: Date.now()
+    };
+    printPokemon(pokeThree);
 })(); //Immediately Invoked Function Expression : IIFE
 function returnTrue() {
     return true;
@@ -33,4 +63,7 @@ function doesntReturn() {
 }
 function never() {
     throw Error();
+}
+function printPokemon(poke) {
+    console.log(poke.name, poke.level, poke.type);
 }

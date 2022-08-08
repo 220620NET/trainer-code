@@ -1,3 +1,5 @@
+import pokemon from './interface';
+
 (function() {
     console.log('hello world!')
     let foo : string = 'bar';
@@ -16,6 +18,12 @@
     any = false;
     any = null;
 
+    //unknown lets you assign anything in that variable but you can't assign unknown to a statically typed var
+    let unknownVar : unknown;
+    // unknownVar = 'string';
+    unknownVar = 3 as number;
+
+    num = unknownVar as number;
     //union type
     let numOrString : number | string = 'string';
     numOrString = 3;
@@ -27,6 +35,36 @@
     console.log(date)
 
     console.log(foo);
+
+    let fc : Function;
+
+    let poke : pokemon = {
+        id: 1,
+        name: 'Pikachu',
+        level: 5,
+        trainerId: 1,
+        type: 'electric'
+    };
+
+    let pokeTwo : pokemon = {
+        name: 'Pikachu',
+        level: 5,
+        trainerId: 1,
+        type: 'electric'
+    }
+
+    //structural typing or duck typing
+    let pokeThree : any = {
+        name: 'Snorlax',
+        level: 5,
+        trainerId: 1,
+        type: 'normal',
+        temperament : 'gentle',
+        id : 2,
+        dateCatched: Date.now()
+    }
+
+    printPokemon(pokeThree);
 })(); //Immediately Invoked Function Expression : IIFE
 
 function returnTrue() : boolean {
@@ -39,4 +77,8 @@ function doesntReturn() : void {
 
 function never() : never {
     throw Error();
+}
+
+function printPokemon(poke: pokemon) : void {
+    console.log(poke.name, poke.level, poke.type);
 }

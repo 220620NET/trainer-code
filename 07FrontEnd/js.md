@@ -65,7 +65,7 @@ JSON is more strict in formatting than js objects:
 ## Modules
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
 https://github.com/mdn/js-examples/tree/master/module-examples/basic-modules
-- `type="module` in script tag
+- `type="module"` in script tag
 - specify what you want to import
 - specify what you want to export 
 
@@ -93,4 +93,4 @@ JS keeps a lexical environment (a phone book for all variable/function names) th
 - let: it is still being hoisted, but the program will prevent you from using the variable before initialization step.
 
 
-- To prevent all of this,.... just please declare and initialize your variables/functions before you use them.
+- To prevent all of this.... just please declare and initialize your variables/functions before you use them.

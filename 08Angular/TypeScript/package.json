@@ -1,0 +1,14 @@
+{
+  "name": "ts-demo",
+  "version": "1.0.0",
+  "description": "typescript demo for 062022 training cohort",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "roaringsheep",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.7.4"
+  }
+}

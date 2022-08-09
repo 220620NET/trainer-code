@@ -71,6 +71,7 @@ function returnTrue() : boolean {
     return true;
 }
 
+
 function doesntReturn() : void {
     //to return nothing, such as undefined or null
 }

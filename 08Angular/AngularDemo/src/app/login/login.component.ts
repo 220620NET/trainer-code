@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { SessionStorageService } from 'angular-web-storage';
 import { PokeTrainer } from '../models/poketrainer';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth-service/auth.service';
+import { PokeApiService } from '../services/poke-api-service/poke-api.service';
 
 @Component({
   selector: 'app-login',
@@ -10,12 +12,10 @@ import { PokeTrainer } from '../models/poketrainer';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  user : PokeTrainer = {
-    name: ''
-  }
   
-  username : FormControl = new FormControl(this.user.name, [
+  constructor(private auth:AuthService, private router : Router, private api : PokeApiService) { }
+  
+  username : FormControl = new FormControl('', [
     Validators.required
   ]);
 
@@ -24,16 +24,36 @@ export class LoginComponent implements OnInit {
     login: 'Log In',
     register: 'Register'
   }
+  loginFailed : boolean = false;
+  registerFailed : boolean = false;
+  errorMsg : string = ''
   loginHandler : Function = () => {
     if(this.username.invalid) {
       return;
     }
-    let url : string = 'https://pokestoragedocker.azurewebsites.net/auth/';
-    if(this.mode === 'login') url += 'login'
-    else url += 'register'
-    this.http.post(url, this.user).subscribe((res) => {
-      this.session.set('currentUser', res);
-    });
+    let user : PokeTrainer = {
+      name : this.username.value
+    };
+    if(this.mode == 'login') {
+      this.api.login(user).subscribe((res) => {
+        if(!res) {
+          this.loginFailed = true;
+        }
+        this.auth.setCurrentUser(res as PokeTrainer);
+        this.router.navigateByUrl('/main');
+      })
+    }
+    else {
+      this.api.register(user).subscribe({next: (res) => {
+        this.auth.setCurrentUser(res as PokeTrainer);
+        this.router.navigateByUrl('/main');
+      }, error: (err) => {
+        if(err.status === 409) {
+          this.registerFailed = true;
+          this.errorMsg = err.error;
+        }
+      }})
+    }
   }
 
   switchMode(mode : string) : void {
@@ -41,9 +61,12 @@ export class LoginComponent implements OnInit {
     this.username.setValue('');
   }
 
-  constructor(private http: HttpClient, private session: SessionStorageService) { }
 
   ngOnInit(): void {
+    if(this.auth.isAuthenticated())
+    {
+      this.router.navigate(['main']);
+    }
   }
 
 }

@@ -3,5 +3,5 @@ export interface PokeTrainer {
     name : string;
     numBadges? : number;
     doB? : string | Date | number;
-    money?: number
+    money?: number;
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { SessionStorageService } from 'angular-web-storage';
-
+import { PokeTrainer } from '../models/poketrainer';
 
 @Component({
   selector: 'app-login',
@@ -11,19 +11,27 @@ import { SessionStorageService } from 'angular-web-storage';
 })
 export class LoginComponent implements OnInit {
 
-  username : FormControl = new FormControl('');
+  user : PokeTrainer = {
+    name: ''
+  }
+  
+  username : FormControl = new FormControl(this.user.name, [
+    Validators.required
+  ]);
+
   mode : string = 'login';
   modes : any = {
-    'login': 'Log In',
-    'register': 'Register'
+    login: 'Log In',
+    register: 'Register'
   }
   loginHandler : Function = () => {
-    let url = 'https://pokestoragedocker.azurewebsites.net/auth/';
+    if(this.username.invalid) {
+      return;
+    }
+    let url : string = 'https://pokestoragedocker.azurewebsites.net/auth/';
     if(this.mode === 'login') url += 'login'
     else url += 'register'
-    this.http.post(url, {
-      'name': this.username.value
-    }).subscribe((res) => {
+    this.http.post(url, this.user).subscribe((res) => {
       this.session.set('currentUser', res);
     });
   }

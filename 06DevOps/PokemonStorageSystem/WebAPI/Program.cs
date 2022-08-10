@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
-{
-    options.SerializerOptions.PropertyNamingPolicy = null;
-});
+// builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+// {
+//     options.SerializerOptions.PropertyNamingPolicy = null;
+// });
 
 //dependency injection handled by ASP.NET Core
 //Different ways to add your dependencies: Singleton, Scoped, Transient

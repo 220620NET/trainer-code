@@ -1,0 +1,9 @@
+.profile-img {
+    max-width: 200px;
+}
+
+.profile-card {
+    padding: 10px;
+    border-radius: 2%;
+    background-color: var(--bs-gray-100);
+}

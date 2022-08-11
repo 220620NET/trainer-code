@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { PokeTrainer } from '../models/poketrainer';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service/auth.service';
@@ -28,6 +27,7 @@ export class LoginComponent implements OnInit {
   registerFailed : boolean = false;
   errorMsg : string = ''
   loginHandler : Function = () => {
+    this.username.markAsTouched();
     if(this.username.invalid) {
       return;
     }
@@ -58,15 +58,20 @@ export class LoginComponent implements OnInit {
 
   switchMode(mode : string) : void {
     this.mode = mode;
-    this.username.setValue('');
+    this.username.reset();
+    this.loginFailed = false;
+    this.registerFailed = false;
   }
-
 
   ngOnInit(): void {
     if(this.auth.isAuthenticated())
     {
       this.router.navigate(['main']);
     }
-  }
 
+    //more typical way of using observable
+    // this.username.valueChanges.subscribe((valuechanged) => {
+    //   console.log(valuechanged);
+    // })
+  }
 }

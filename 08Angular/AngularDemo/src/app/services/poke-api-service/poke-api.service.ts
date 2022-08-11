@@ -23,6 +23,10 @@ export class PokeApiService {
   }
 
   getPokemonByTrainerId(trainerId : number) : Observable<Pokemon[]> {
-    return this.http.get(this.url + '/pokemon') as Observable<Pokemon[]>;
+    return this.http.get(this.url + `pokemon?trainerId=${trainerId}`) as Observable<Pokemon[]>;
+  }
+
+  withdrawPokemon(pokemonId : number) : Observable<Pokemon> {
+    return this.http.delete(this.url + `pokemon/${pokemonId}`) as Observable<Pokemon>;
   }
 }

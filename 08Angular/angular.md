@@ -47,3 +47,55 @@ Decorator is a special syntax that lets angular know that it is angular's elemen
 ### Modules
 Angular module is very similar to namespaces in C#. Like how we bundle or register different types to a namespace, we register different angular elements to a module. Each components have to be declared in a *single(one and only one)* module. In order for other modules to have access to components declared in different modules, you need to export that component in your module, and then you need to import that particular module in module.ts file.
 Modules are decorated with `@ngModule` decorator that contains information regarding its members (components in declarations property), its dependencies (imports property) and what it exports, and so on and so forth.
+
+### Services
+Services are used to encapsulate any non-presentation logic. Services are also very useful to send data between two components that are not related in parent-child relationships
+To create a service, `ng g s <service-name>` or `ng generate service <name>`
+
+### Dependency Injection
+In any angular elements, we can ask for other classes/types/interfaces it require to function by listing them inside its constructor parameter.
+
+### Lifecycle hooks
+In each angular component's life time (from initial render to destruction), there are many different events or stages it goes through. As developers, we can subscribe to those events using lifecycle hooks to do something whenever those events are triggered. For example, if you want to do some DOM manipulation once the component renders, you can put that logic in ngOnInit function, or if you want to clean up some resources when angular destroys the component, do so on ngOnDestroy. ngDoCheck is particularly useful if you're relying heavily on an external library that angular is not aware of. 
+
+### Directive
+We use directives to bring programmatic functionality to html. For example, *ngIf/else, *ngSwitch, *ngFor, *ngClass are all examples of directive.
+Two different categories of directive
+- Structural Directive
+    - ex. *ngIf, *ngFor, *ngSwitch
+
+- Attribute Directive
+    - ex. *ngClass, *ngStyle, *ngModel
+
+### Model Binding
+- One Way Binding
+    - Event Binding
+        - goes from HTML to TS
+        - syntax: `(<event-name>)`
+        - `(click)`
+        - `(dblclick)`
+    - Attribute Binding
+        - TS to HTML
+        - syntax: `[attr-name]`
+        - ex. `[class]=variableNameInComponentTS`
+    - String Interpolation
+        - TS to HTML
+        - syntax: `{{varName}}`
+
+- Two Way Binding
+    - both the view (html file) and the logic (the ts file) are dynamically updating each other
+    - Syntax: `[(modelName)]` 'banana box'
+    - very commonly used in template-based forms `[(ngModel)]`
+
+### Forms
+- Template Based Form
+- Reactive Forms
+### Pipes
+
+### Communicating Data between components
+- Services
+- input/output directive 
+- route param
+- query param
+    - through ActivatedRoute class
+- session/local storage

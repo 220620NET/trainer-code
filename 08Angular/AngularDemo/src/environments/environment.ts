@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'https://pokestoragedocker.azurewebsites.net/'
+  api: 'https://localhost:7278/'
 };
 
 /*

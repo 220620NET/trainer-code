@@ -25,9 +25,10 @@ public class EFCPokemonRepo : IPokemonRepository
     {
         try
         {
-            // Pokemon poke = _context.Pokemons.FirstOrDefault(p => p.Id == pokeId);
-            // _context.Entry<Pokemon>(poke).State = EntityState.Deleted;
-            _context.Remove(new Pokemon{Id = pokeId});
+            Pokemon poke = _context.Pokemons.FirstOrDefault(p => p.Id == pokeId);
+            if(poke == null) return false;
+            _context.Entry<Pokemon>(poke).State = EntityState.Deleted;
+            // _context.Remove(new Pokemon{Id = pokeId});
             _context.SaveChanges();
             return true;
 

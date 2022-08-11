@@ -9,6 +9,17 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowAllHeadersPolicy",
+        builder =>
+        {
+            builder.WithOrigins("*")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 // builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
 // {
 //     options.SerializerOptions.PropertyNamingPolicy = null;
@@ -45,6 +56,9 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+
+app.UseCors("MyAllowAllHeadersPolicy");
 
 //-------------------------Auth Controller--------------------------
 //When we ask for a reference type such as PokeTrainer as a payload

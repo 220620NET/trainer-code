@@ -72,7 +72,7 @@ Two different categories of directive
     - Event Binding
         - goes from HTML to TS
         - syntax: `(<event-name>)`
-        - `(click)`
+        - `(click)="clickEventHandler()"`
         - `(dblclick)`
     - Attribute Binding
         - TS to HTML
@@ -88,8 +88,9 @@ Two different categories of directive
     - very commonly used in template-based forms `[(ngModel)]`
 
 ### Forms
-- Template Based Form
-- Reactive Forms
+- Template Based Form: template based from html
+- Reactive Forms: model based in TS
+
 ### Pipes
 
 ### Communicating Data between components

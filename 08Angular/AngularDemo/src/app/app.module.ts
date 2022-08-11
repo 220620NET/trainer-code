@@ -4,9 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokemonViewComponent } from './pokemon-view/pokemon-view.component';
+import { PokemonViewComponent, WithdrawDialogue } from './pokemon-view/pokemon-view.component';
 import { LoginComponent } from './login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
@@ -14,6 +14,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { DepositPokemonComponent } from './deposit-pokemon/deposit-pokemon.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { MatCardModule } from '@angular/material/card';
     LoginComponent,
     NavbarComponent,
     PokemonListComponent,
-    ProfileComponent
+    ProfileComponent,
+    WithdrawDialogue,
+    DepositPokemonComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,11 @@ import { MatCardModule } from '@angular/material/card';
     AngularWebStorageModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
   // exports: [

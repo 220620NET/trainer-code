@@ -29,4 +29,8 @@ export class PokeApiService {
   withdrawPokemon(pokemonId : number) : Observable<Pokemon> {
     return this.http.delete(this.url + `pokemon/${pokemonId}`) as Observable<Pokemon>;
   }
+
+  depositPokemon(pokemon : Pokemon) : Observable<Pokemon> {
+    return this.http.post(this.url + 'pokemon', pokemon) as Observable<Pokemon>;
+  }
 }

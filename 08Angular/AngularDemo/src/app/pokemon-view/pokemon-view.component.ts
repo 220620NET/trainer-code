@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth-service/auth.service';
 import { PokeApiService } from '../services/poke-api-service/poke-api.service';
 import { PokeTrainer } from '../models/poketrainer';
 import { Pokemon } from '../models/pokemon';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pokemon-view',
@@ -11,7 +12,7 @@ import { Pokemon } from '../models/pokemon';
 })
 export class PokemonViewComponent implements OnInit, OnDestroy {
 
-  constructor(private auth: AuthService, private api:PokeApiService) { }
+  constructor(private auth: AuthService, private api:PokeApiService, public dialog: MatDialog) { }
 
   currentUser : PokeTrainer = {
     name : ''
@@ -21,16 +22,25 @@ export class PokemonViewComponent implements OnInit, OnDestroy {
 
   withdraw(pokeId : number | undefined) {
     if(pokeId) {
-      if(confirm('would you really like to withdraw this pokemon?')){
-        this.api.withdrawPokemon(pokeId).subscribe((res) => {
-          alert('here is your pokemon!' + res.name);
-          if(this.currentUser.id) {
-            this.api.getPokemonByTrainerId(this.currentUser.id).subscribe((res) => {
-              this.pokemons = res;
-            })
-          }
-        })
-      }
+      let dialog : MatDialogRef<WithdrawDialogue> = this.dialog.open(WithdrawDialogue, {
+        width: '250px'
+      })
+      dialog.afterClosed().subscribe((result) => {
+        if(result){
+          this.api.withdrawPokemon(pokeId).subscribe((res) => {
+            alert('here is your pokemon! ' + JSON.stringify(res));
+            this.updatePokemon();
+          })
+        }
+      })
+    }
+  }
+
+  updatePokemon() : void {
+    if(this.currentUser.id) {
+      this.api.getPokemonByTrainerId(this.currentUser.id).subscribe((res) => {
+        this.pokemons = res;
+      })
     }
   }
 
@@ -38,16 +48,23 @@ export class PokemonViewComponent implements OnInit, OnDestroy {
     //get data, do some other initial set up behavior
     //get pokemon data according to the current user
     this.currentUser = this.auth.getCurrentUser();
-    if(this.currentUser.id) {
-      this.api.getPokemonByTrainerId(this.currentUser.id).subscribe((res) => {
-        this.pokemons = res as Pokemon[];
-        console.log(res);
-      });
-    }
+    this.updatePokemon();
   }
 
   ngOnDestroy() : void {
     //clean up code here
   }
 
+}
+
+@Component({
+  selector: 'withdraw-dialogue',
+  templateUrl: 'withdrawdialogue.component.html',
+})
+export class WithdrawDialogue {
+  constructor(public dialogRef: MatDialogRef<WithdrawDialogue>) {}
+
+  onClick(answer : string): void {
+    this.dialogRef.close(answer === 'yes' ? true : false);
+  }
 }

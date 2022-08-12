@@ -9,7 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +24,6 @@ import { DepositPokemonComponent } from './deposit-pokemon/deposit-pokemon.compo
     PokemonViewComponent,
     LoginComponent,
     NavbarComponent,
-    PokemonListComponent,
     ProfileComponent,
     WithdrawDialogue,
     DepositPokemonComponent

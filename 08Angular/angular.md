@@ -92,6 +92,8 @@ Two different categories of directive
 - Reactive Forms: model based in TS
 
 ### Pipes
+- a way to format data in templates
+- built in pipes: date, currency, json, async, etc.
 
 ### Communicating Data between components
 - Services

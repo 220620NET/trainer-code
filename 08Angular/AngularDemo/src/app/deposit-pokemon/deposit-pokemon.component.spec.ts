@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AngularWebStorageModule } from 'angular-web-storage';
 
 import { DepositPokemonComponent } from './deposit-pokemon.component';
 
@@ -8,7 +10,21 @@ describe('DepositPokemonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DepositPokemonComponent ]
+      declarations: [ DepositPokemonComponent ],
+      imports: [
+        MatDialogModule,
+        AngularWebStorageModule
+      ],
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {}
+        }
+      ]
     })
     .compileComponents();
 

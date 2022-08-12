@@ -37,7 +37,7 @@ export class PokemonViewComponent implements OnInit, OnDestroy {
   }
 
   updatePokemon() : void {
-    if(this.currentUser.id) {
+    if(this.currentUser?.id) {
       this.api.getPokemonByTrainerId(this.currentUser.id).subscribe((res) => {
         this.pokemons = res;
       })

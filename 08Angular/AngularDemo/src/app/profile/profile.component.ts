@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
     name: ''
   }
 
-  depositPokemon() {
+  depositPokemon() : void {
     let dialogRef : MatDialogRef<DepositPokemonComponent>  = this.dialog.open(DepositPokemonComponent, {
       data: this.pokemonToCreate
     });
@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.auth.getCurrentUser();
-    this.pokemonToCreate.trainerId = this.currentUser.id ?? 0;
+    this.pokemonToCreate.trainerId = this.currentUser?.id ?? 0;
   }
 
 }

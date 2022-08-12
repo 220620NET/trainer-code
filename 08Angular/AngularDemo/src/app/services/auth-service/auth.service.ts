@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService, SessionStorageService } from 'angular-web-storage';
+import { LocalStorageService } from 'angular-web-storage';
 import { PokeTrainer } from 'src/app/models/poketrainer';
 
 @Injectable({

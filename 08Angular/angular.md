@@ -102,3 +102,8 @@ Two different categories of directive
 - query param
     - through ActivatedRoute class
 - session/local storage
+
+## Testing
+Angular Testing by default is done with Jasmine and Karma
+Jasmine is a Behavior driven testing framework (xunit in C#)
+Karma test runner - especially useful for testing browser compatibility

@@ -34,7 +34,6 @@ describe('ProfileComponent', () => {
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
     fixture.detectChanges();
-
   });
 
   it('should create', () => {
@@ -46,13 +45,13 @@ describe('ProfileComponent', () => {
     const btn = await loader.getHarness(MatButtonHarness);
     await btn.click();
     expect(component.depositPokemon).toHaveBeenCalled();
-  })
+  });
 
   it('should have Test Trainer name', () => {
     expect(component.currentUser).toBeTruthy();
     expect(component.currentUser.name).toEqual('Test Trainer');
   })
-  
+
   it('should display Test Trainer as name', async () => {
     await fixture.whenStable().then(() => {
       const elem : HTMLElement = fixture.nativeElement;

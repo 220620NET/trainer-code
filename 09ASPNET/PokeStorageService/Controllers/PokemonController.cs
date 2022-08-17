@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Models;
 using Services;
+using Microsoft.Extensions.Caching.Memory;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PokeStorageService.Controllers;
@@ -9,10 +10,12 @@ namespace PokeStorageService.Controllers;
 public class PokemonController : ControllerBase
 {
     private readonly PokemonService _service;
+    private readonly IMemoryCache _cache;
 
-    public PokemonController(PokemonService service)
+    public PokemonController(PokemonService service, IMemoryCache cache)
     {
         _service = service;
+        _cache = cache;
     }
     // GET: api/<PokemonController>?value=""
     [HttpGet]
@@ -20,11 +23,14 @@ public class PokemonController : ControllerBase
     {
         List<Pokemon> pokes = new(); 
         if(trainerId == null) {
-            pokes = _service.GetAllPokemons();
+            //Let's check the cache if we already have this cached in memory
+            if(!_cache.TryGetValue("allPokemons", out pokes)) {
+                pokes = _service.GetAllPokemons();
+                _cache.Set("allPokemons", pokes, new TimeSpan(0, 0, 30));
+            }
         
         } else {
             pokes = _service.GetPokemonsByTrainerId((int)trainerId);
-
         }
         return pokes.Count > 0 ? Ok(pokes) : NoContent();
     }

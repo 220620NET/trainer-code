@@ -14,3 +14,18 @@ ASP.NET Core controllers inherit from the class ControllerBase that offers many 
 ## Model Binding
 Classes that inherit the ControllerBase class also offers model validating through DataAnnotations namespace. With DataAnnotaions, we can simply annotate on top of our model properties to require a certain set of validations via attributes, when the controller class, upon data binding, will automatically check for those validators and return 400 Bad Request Response if it fails any of the validations.
 
+## Caching
+ASP.NET Core offers ability for endpoints to cache their resources in memory, through MemoryCache. This can offer a performance boost but also can be expensive (because it stores data in memory).
+https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory?view=aspnetcore-6.0
+
+## Filters
+Filters work similarly to middleware that they address cross-cutting concerns as in, concerns that occur to many different scenarios. Filters are different from Middleware though, in that they work inside of the controller context.
+There are 5 different types of filters that execute in a particular order, and filters are used as attributes on top of either a controller or an action.
+https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-6.0
+
+## Integration Testing
+Integration Testing is interested testing the whole application working together. We do not isolate any one component or fake any dependencies, instead we set up testing client and test DB's to use the entire application to test each layers working seamlessly together. (We'll use things like testing client and inmemoryDB's)
+Pros: integration testing allows us to test the whole app (including the framework, db access codes, etc, that relies on external resources)
+Cons: High setup overhead and cost in running integration tests.
+
+https://docs.microsoft.com/en-us/aspnet/core/test/integration-tests?view=aspnetcore-6.0

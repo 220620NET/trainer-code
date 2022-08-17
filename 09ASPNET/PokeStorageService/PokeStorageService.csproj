@@ -20,4 +20,8 @@
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="MyTestProject" />
+  </ItemGroup>
+
 </Project>

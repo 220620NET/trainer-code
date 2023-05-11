@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   username : FormControl = new FormControl('', [
     Validators.required
   ]);
+  loggingIn : boolean = false;
 
   mode : string = 'login';
   modes : any = {
@@ -34,22 +35,31 @@ export class LoginComponent implements OnInit {
     let user : PokeTrainer = {
       name : this.username.value
     };
+
+    
+
     if(this.mode == 'login') {
+      //set login to true so we can display spinner
+      this.loggingIn = true;
       this.api.login(user).subscribe((res) => {
         if(!res) {
           this.loginFailed = true;
+          this.loggingIn = false;
         }
         this.auth.setCurrentUser(res as PokeTrainer);
         this.router.navigateByUrl('/main');
       })
     }
     else {
+      //set login to true so we can display spinner
+      this.loggingIn = true;
       this.api.register(user).subscribe({next: (res) => {
         this.auth.setCurrentUser(res as PokeTrainer);
         this.router.navigateByUrl('/main');
       }, error: (err) => {
         if(err.status === 409) {
           this.registerFailed = true;
+          this.loggingIn = false;
           this.errorMsg = err.error;
         }
       }})
@@ -70,8 +80,10 @@ export class LoginComponent implements OnInit {
     }
 
     //more typical way of using observable
-    // this.username.valueChanges.subscribe((valuechanged) => {
-    //   console.log(valuechanged);
-    // })
+    this.username.valueChanges.subscribe((valuechanged) => {
+      if(this.loginFailed) {
+        this.loginFailed = false;
+      }
+    })
   }
 }

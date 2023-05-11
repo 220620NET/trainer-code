@@ -84,6 +84,9 @@ export class LoginComponent implements OnInit {
       if(this.loginFailed) {
         this.loginFailed = false;
       }
+      if(this.registerFailed) {
+        this.registerFailed = false;
+      }
     })
   }
 }

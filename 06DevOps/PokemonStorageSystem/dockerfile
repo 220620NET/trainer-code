@@ -2,7 +2,7 @@
 
 # FROM Keyword imports the baseimage to build our image upon
 # In our case, we are using .NET SDK as our initial base image 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 As build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 As build
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN dotnet clean WebAPI
 RUN dotnet publish WebAPI --configuration Release -o ./publish
 
 # Multi Stage build
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 As run
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 As run
 
 WORKDIR /app
 

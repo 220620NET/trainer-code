@@ -25,7 +25,7 @@ export class DepositPokemonComponent implements OnInit {
   });
 
   onClick(res : string) {
-      this.data.level = this.pokemonForm.controls.level.value ?? 0;
+      this.data.level = this.pokemonForm.controls.level.value ?? 1;
       this.data.name = this.pokemonForm.controls.name.value ?? '';
       this.data.nickName = this.pokemonForm.controls.nickName.value ?? '';
       this.data.disposition = this.pokemonForm.controls.disposition.value ?? '';

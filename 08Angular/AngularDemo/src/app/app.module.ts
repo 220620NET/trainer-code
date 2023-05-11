@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokemonViewComponent, WithdrawDialogue } from './pokemon-view/pokemon-view.component';
+import { PokemonViewComponent, WithdrawDialogue, WithdrawnPokemon } from './pokemon-view/pokemon-view.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,7 +26,8 @@ import { DepositPokemonComponent } from './deposit-pokemon/deposit-pokemon.compo
     NavbarComponent,
     ProfileComponent,
     WithdrawDialogue,
-    DepositPokemonComponent
+    DepositPokemonComponent,
+    WithdrawnPokemon
   ],
   imports: [
     BrowserModule,

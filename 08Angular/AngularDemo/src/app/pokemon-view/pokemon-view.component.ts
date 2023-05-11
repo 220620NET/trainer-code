@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { AuthService } from '../services/auth-service/auth.service';
 import { PokeApiService } from '../services/poke-api-service/poke-api.service';
 import { PokeTrainer } from '../models/poketrainer';
 import { Pokemon } from '../models/pokemon';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pokemon-view',
@@ -28,8 +28,12 @@ export class PokemonViewComponent implements OnInit, OnDestroy {
       dialog.afterClosed().subscribe((result) => {
         if(result){
           this.api.withdrawPokemon(pokeId).subscribe((res) => {
-            alert('here is your pokemon! ' + JSON.stringify(res));
-            this.updatePokemon();
+            const dialogref = this.dialog.open(WithdrawnPokemon, {
+              data: res
+            });
+            dialogref.afterClosed().subscribe(closedResult => {
+              this.updatePokemon();
+            })
           })
         }
       })
@@ -37,8 +41,8 @@ export class PokemonViewComponent implements OnInit, OnDestroy {
   }
 
   updatePokemon() : void {
-    if(this.currentUser?.id) {
-      this.api.getPokemonByTrainerId(this.currentUser.id).subscribe((res) => {
+    if(this.auth.isAuthenticated()) {
+      this.api.getPokemonByTrainerId(this.auth.getCurrentUser().id as number).subscribe((res) => {
         this.pokemons = res;
       })
     }
@@ -66,5 +70,17 @@ export class WithdrawDialogue {
 
   onClick(answer : string): void {
     this.dialogRef.close(answer === 'yes' ? true : false);
+  }
+}
+
+@Component({
+  selector: 'withdrawn-pokemon',
+  templateUrl: 'withdrawn-pokemon.component.html'
+})
+export class WithdrawnPokemon {
+  constructor(public dialogRef: MatDialogRef<WithdrawnPokemon>, @Inject(MAT_DIALOG_DATA) public data: Pokemon) {}
+
+  onClick(): void {
+    this.dialogRef.close();
   }
 }

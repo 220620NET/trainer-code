@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
 
   @Output() pokeCreated = new EventEmitter<Pokemon>();
   pokemonToCreate : Pokemon = {
-    level: 0,
+    level: 1,
     trainerId: 0,
     name: '',
     disposition: '',
@@ -37,8 +37,8 @@ export class ProfileComponent implements OnInit {
         if(data.name && data.level > 0) {
           this.api.depositPokemon(data).subscribe((res) => {
             this.pokemonToCreate = {
-              level: 0,
-              trainerId: 0,
+              level: 1,
+              trainerId: this.auth.getCurrentUser().id ?? 0,
               name: '',
               disposition: '',
               type: '',
@@ -54,6 +54,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.auth.getCurrentUser();
     this.pokemonToCreate.trainerId = this.currentUser?.id ?? 0;
+    console.log('profile comp init', this.currentUser);
   }
 
 }
